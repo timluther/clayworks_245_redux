@@ -1,0 +1,264 @@
+program Clayworks;
+{$mode ObjFPC}{$H+}
+{$i clay.inc}
+
+uses
+   {FPC}
+   {$IFDEF UNIX}cthreads, {$ENDIF}
+   SysUtils, Classes,
+
+   {Clayworks}
+   ClayTypes, ClayGlobal, ClayLog,
+   ClayWindow,
+   {$IFDEF Windows} ClayWindowWin32, ClayRenderGDI, {$ENDIF}
+
+   {Original Units}
+   tmaths,diskop,
+   msmouse,chardef,strings,
+   gbasics,ggraph,colour,stdpal,
+   Basic3d,tdb,tdeditb,
+   views,
+   twinb,twindraw,
+   gadgets,cdialog,tdwin,tmenust,pcx256,
+
+   {Note : temporary, old main program unit but lots of stuff in it}
+   claycp;
+
+type
+
+   { TClayworks }
+
+   TClayworks = class
+      Window : TClayWindow;
+      constructor Create(); virtual;
+      destructor Destroy(); override;
+      procedure Execute(); virtual;
+   private
+      FProgramPath : String;
+      FTimeStamp : UInt32;
+      FFPS : Float32;
+      procedure DoKeyDown(AWindow : TClayWindow; AKey : SInt32);
+      procedure DoKeyUp(AWindow : TClayWindow; AKey : SInt32);
+      procedure DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
+      procedure DoMouseMove(AWindow : TClayWindow; X, Y : SInt32);
+      procedure DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
+   end;
+
+var
+   Clay : TClayworks;
+
+{ TClayworks }
+
+constructor TClayworks.Create();
+
+begin
+   {Create Window}
+   {$IFDEF Windows}
+   Window := TClayWindowWin32.Create('Clayworks', 1024, 768);
+   {Assign Input Callbacks}
+   Window.OnMouseMove := @DoMouseMove;
+   Window.OnMouseDown := @DoMouseDown;
+   Window.OnMouseUp := @DoMouseUp;
+   Window.OnKeyDown := @DoKeyDown;
+   Window.OnKeyUp := @DoKeyUp;
+
+   {Temp hack - store pointer to canvas in old style ClayRenderGDI.pas driver}
+   ClayRenderGDI.GDICanvas := TClayCanvasGDI(Window.Canvas);
+
+   {Make Global Message Pump Pointer}
+   PumpOSMessages := @TClayWindowWin32(Window).PumpOSMessages;
+   {$ENDIF}
+
+   LogError('Main','There''s Not enough cheese');
+   LogStatus('Main','Yes There is. Look again.');
+
+   Window.SetCaption('Clayworks 2.45');
+
+   {Reset Host Input Vars}
+   HostMessageLock := false;
+   HostMouseX := 0;
+   HostMouseY := 0;
+   HostMouseZ := 0;
+
+   {Reset msmouse.pas vars}
+   xm := 0;
+   ym := 0;
+   zm := 0;
+   ms_pressed := false;
+   ms_released := false;
+   ms_doubleclicked := false;
+   ms_gridmoved := false;
+
+   {Setup Perspective Var}
+   PerspectiveINT:=PersStart;
+
+   {Extract Program Path}
+   FProgramPath := IncludeTrailingBackslash(ExtractFileDir(ParamStr(0)));
+   {Setup Global Clayworks Paths}
+   clay_dir := FProgramPath;
+   font_path := clay_dir+'SANSF16B.FNT';
+
+   {Initialize Graphics}
+   initgraph(VideoModeGDI1024x768);
+   //AResult := initgraph(VideoModeLazarusFullscreen);
+
+   {Setup Palette}
+   usecolours(0,16);
+
+   {Load Font List}
+   if fexist(font_path) then loadfontlist(font_path, tcharset) else
+   begin
+      {TODO : Debug log}
+      //writeln('Font file not found, please place the file sans16b.fnt in the program file''s directory');
+      exit;
+   end;
+
+   {Setup Character Set}
+   //move(altletters,mem[seg(tcharset):ofs(tcharset)+(254 shl 4)],32);
+   //move(ctrlletters,mem[seg(tcharset):ofs(tcharset)+(252 shl 4)],32);
+
+   {Manual Width Tweaks?}
+   tcharset.widths[252]:=8;
+   tcharset.widths[253]:=9;
+   tcharset.widths[254]:=8;
+   tcharset.widths[255]:=9;
+   tcharset.attrib:=1;
+
+   {Load Font}
+   if fexist(clay_dir+defaultfont) then
+      Vfontin := vfont.load(defaultfont)
+   else
+      Vfontin := false;
+
+   {Load Info}
+   if fexist(clay_dir+'info.txt') then
+      textfile := loadtext(clay_dir+'info.txt');
+   getmem(objectinfo,512);
+   gridpic:=nil;
+
+   {Setup Draw Object}
+   new(draw_object,create(4900,4200,4200));
+
+   {Initialize Graphics Mode}
+   setpal(@pal16,0,16);
+
+   {Initialize 3D renderer}
+   init3d();
+
+   {Setup Light}
+   lightvec.setlight(0,0,0,500,50,10,SC.ColourDepth shr 1);
+
+   {Create Clayworks Application}
+   with SC.screenport do
+      application := new(claycp.clay,create(0,0,x2,y2));
+
+   InitTWIN(application);
+
+   {Load warning PCX}
+  if fexist(clay_dir+'warn.pcx') then
+    warningsign:=readpcx(clay_dir+'warn.pcx',PAcolcheck)
+  else
+    warningsign:=nil;
+
+  mouseon;
+  root:=application;
+  {
+  {Show register file}
+  registerfile:=loadtext(clay_dir+'register.txt');
+  desktop^.add_and_draw(new(infodialog,create(90,80,590,470,registerfile,true)),VPcentre,PIDundefined);
+  }
+
+  {Set Root UI Object to initially be the application}
+  Views.root := application;
+
+  application^.draw;
+end;
+
+destructor TClayworks.Destroy();
+begin
+   {Clayworks Flag}
+   fin := True;
+
+   {Destroy ClayWorks}
+
+   mouseoff;
+   if vfontin then
+   vfont.done;
+
+   dispose(draw_object, done);
+   close3d;
+   dispose(application, done);
+
+   freemem(textfile,strlen(textfile));
+   {freemem(objectinfo,512);}
+   {if warningsign<>nil then
+   destroybitmap(warningsign);   }
+
+   closegraph;
+
+   {Free Objects Memory}
+   Window.Free;
+
+   LogStatus('TClayWorks','That was ClayWorks V'+VersionStr+', (C) T.lewis 1995.$'+chr(13));
+end;
+
+procedure TClayworks.Execute();
+begin
+   while (not ClayFlagQuit) do
+   begin
+      {Window.Canvas.SetColour(255,0,0);
+      Window.Canvas.Line(0,0,1000,1000);
+      Window.Canvas.SetColour(0,255,0);
+      Window.Canvas.Rect(100,100,250,250);}
+
+     // application^.draw();
+
+      {Poll the Window for OS Messages}
+      Window.PumpOSMessages();
+   end;
+end;
+
+procedure TClayworks.DoMouseMove(AWindow : TClayWindow; X, Y : SInt32);
+begin
+   HostMouseX := X;
+   HostMouseY := Y;
+   //MPos();
+end;
+
+procedure TClayworks.DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
+begin
+   //HostMouseX := X;
+   //HostMouseY := Y;
+   HostMouseZ := 1;
+
+   {Trigger Chain}
+   MPos();
+
+   EventMPos();
+end;
+
+procedure TClayworks.DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
+begin
+   //HostMouseX := X;
+   //HostMouseY := Y;
+   HostMouseZ := 0;
+end;
+
+procedure TClayworks.DoKeyDown(AWindow : TClayWindow; AKey : SInt32);
+begin
+
+end;
+
+procedure TClayworks.DoKeyUp(AWindow : TClayWindow; AKey : SInt32);
+begin
+
+end;
+
+{Include Resource Files - IE Application Icon}
+{$R *.res}
+
+begin
+   Clay := TClayworks.Create();
+   Clay.Execute();
+   Clay.Free();
+end.
