@@ -119,12 +119,14 @@ begin
    FWin32Instance := HINSTANCE;
 
    {Setup Win32 Window Class}
+
+   {note : for multiple windows you need to reuse the class or use a different ClassName for each}
    FWin32ClassName := 'ClayWindow';
    FWin32Class.lpszClassName := pchar(FWin32ClassName);
    FWin32Class.hInstance := FWin32Instance;
    FWin32Class.lpfnWndProc := @Win32MsgProc; {Set the Win32 Message Router}
 
-   {Here we Control the Buffering}
+   {Here we Control the Buffering, surface caching for win32 redrawing etc}
    FWin32Class.Style := 0;
    //FWin32Class.Style := CS_OWNDC;
    //FWin32Class.Style := (CS_HREDRAW or CS_VREDRAW or CS_OWNDC);
@@ -145,7 +147,7 @@ begin
    {Window Titlebar Style, Border Style etc}
    FWin32Style := (
             WS_CAPTION or WS_SYSMENU or
-            WS_MINIMIZEBOX or WS_MAXIMIZEBOX or WS_SIZEBOX);
+            WS_MINIMIZEBOX {or WS_MAXIMIZEBOX or WS_SIZEBOX});
    FWin32ExStyle := WS_EX_APPWINDOW;
 
    {Calculate Screen Centre Window Offset}
@@ -206,8 +208,10 @@ end;
 
 destructor TClayWindowWin32.Destroy();
 begin
+   {Release Mouse Capture (if enabled)}
    ReleaseCapture;
-   {Release the HDC}
+
+   {Release the HDC (we shouldn't really hold onto DCs but its only one)}
    ReleaseDC(FWin32Handle, FWin32HDC);
 
    {Destroy the Window}
@@ -255,10 +259,13 @@ begin
       begin
          {App Lost Focus, Release Keys etc}
       end;
-      WM_ERASEBKGND :
-      begin {Blank the window while resizing}
-         {Tell Windows not to try and erase the background}
-         Result := 1; {We've handled the message. Don't pass to Windows}
+      WM_ERASEBKGND : {The Windows background needs to be redrawn}
+      begin
+         if OnClear<>nil then
+         begin {Callback for OS Window Clear Notification}
+            OnClear(Self);
+            Result := 1; {Tell Windows that we've handled it ourselves}
+         end;
       end;
       WM_SIZING : {The Window is Currently Resizing}
       begin
@@ -309,7 +316,7 @@ begin
       end;
    end;
 
-   if (Result = -1) then {Message not handled. Pass To Windows}
+   if (Result = -1) then {Message not handled. Pass to Windows}
       Result := DefWindowProc(FWin32Handle,Win32Msg,Win32wParam,Win32lParam);
 end;
 

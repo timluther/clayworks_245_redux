@@ -8,7 +8,8 @@
       <Unit>
         <Filename Value="Clayworks.pas"/>
         <IsPartOfProject Value="True"/>
-        <CursorPos X="33" Y="215"/>
+        <TopLine Value="220"/>
+        <CursorPos X="5" Y="275"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -17,8 +18,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="319"/>
-        <CursorPos X="4" Y="340"/>
+        <TopLine Value="329"/>
+        <CursorPos X="5" Y="384"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -32,9 +33,10 @@
       <Unit>
         <Filename Value="ClayTypes.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
-        <TopLine Value="25"/>
-        <CursorPos X="40" Y="43"/>
+        <TopLine Value="261"/>
+        <CursorPos X="68" Y="281"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -42,8 +44,8 @@
         <Filename Value="ClayWindow.pas"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="9"/>
-        <CursorPos X="10" Y="16"/>
+        <TopLine Value="59"/>
+        <CursorPos X="5" Y="114"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -263,7 +265,6 @@
       </Unit>
       <Unit>
         <Filename Value="ClayRenderGDI.pas"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
         <TopLine Value="401"/>
@@ -337,66 +338,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <General>
-      <ActiveWindowIndexAtStart Value="1"/>
-    </General>
     <JumpHistory HistoryIndex="29">
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="60" Column="30" TopLine="32"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="44" Column="64" TopLine="9"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="219" Column="4" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="234" Column="19" TopLine="194"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="225" TopLine="199"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="219" TopLine="199"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="229" Column="4" TopLine="199"/>
-      </Position>
-      <Position>
-        <Filename Value="Clayworks.pas"/>
-        <Caret Line="231" TopLine="191"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="332" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="334" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="335" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="338" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="339" TopLine="304"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
-        <Caret Line="340" TopLine="304"/>
-      </Position>
       <Position>
         <Filename Value="ClayWindowWin32.pas"/>
         <Caret Line="278" Column="53" TopLine="255"/>
@@ -459,6 +401,62 @@
       <Position>
         <Filename Value="Clayworks.pas"/>
         <Caret Line="215" Column="33"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayTypes.pas"/>
+        <Caret Line="29" Column="38" TopLine="25"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="15" Column="24"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="264" Column="5" TopLine="209"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="214" Column="8" TopLine="209"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="264" Column="5" TopLine="209"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="276" TopLine="221"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindowWin32.pas"/>
+        <Caret Line="321" Column="25" TopLine="320"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindowWin32.pas"/>
+        <Caret Line="377" Column="5" TopLine="322"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="49" Column="31" TopLine="43"/>
+      </Position>
+      <Position>
+        <Filename Value="Clayworks.pas"/>
+        <Caret Line="276" TopLine="221"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindowWin32.pas"/>
+        <Caret Line="323" Column="32" TopLine="322"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindowWin32.pas"/>
+        <Caret Line="377" Column="5" TopLine="322"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindow.pas"/>
+        <Caret Line="25" Column="21" TopLine="9"/>
+      </Position>
+      <Position>
+        <Filename Value="ClayWindow.pas"/>
+        <Caret Line="108" Column="5" TopLine="53"/>
       </Position>
     </JumpHistory>
     <RunParams>

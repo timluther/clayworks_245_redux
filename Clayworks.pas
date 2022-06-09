@@ -25,7 +25,6 @@ uses
    claycp;
 
 type
-
    { TClayworks }
 
    TClayworks = class
@@ -42,6 +41,7 @@ type
       procedure DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
       procedure DoMouseMove(AWindow : TClayWindow; X, Y : SInt32);
       procedure DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
+      procedure DoWindowClear(AWindow : TClayWindow);
    end;
 
 var
@@ -52,7 +52,12 @@ var
 constructor TClayworks.Create();
 
 begin
+   LogStatus('TClayWorks','V'+VersionStr+', (C) T.lewis 1995.$'+chr(13));
+
+
    {Create Window}
+   LogStatus('ClayWorks','Creating Window');
+
    {$IFDEF Windows}
    Window := TClayWindowWin32.Create('Clayworks', 1024, 768);
    {Assign Input Callbacks}
@@ -62,17 +67,17 @@ begin
    Window.OnKeyDown := @DoKeyDown;
    Window.OnKeyUp := @DoKeyUp;
 
+   {Assign General Callbacks}
+   Window.OnClear  := @DoWindowClear;
+
    {Temp hack - store pointer to canvas in old style ClayRenderGDI.pas driver}
    ClayRenderGDI.GDICanvas := TClayCanvasGDI(Window.Canvas);
 
-   {Make Global Message Pump Pointer}
+   {Set Global Message Pump Pointer}
    PumpOSMessages := @TClayWindowWin32(Window).PumpOSMessages;
    {$ENDIF}
 
-   LogError('Main','There''s Not enough cheese');
-   LogStatus('Main','Yes There is. Look again.');
-
-   Window.SetCaption('Clayworks 2.45');
+   Window.SetCaption('Clayworks '+VersionStr);
 
    {Reset Host Input Vars}
    HostMessageLock := false;
@@ -99,6 +104,7 @@ begin
    font_path := clay_dir+'SANSF16B.FNT';
 
    {Initialize Graphics}
+   LogStatus('ClayWorks','Initializing Graphics');
    initgraph(VideoModeGDI1024x768);
    //AResult := initgraph(VideoModeLazarusFullscreen);
 
@@ -125,6 +131,7 @@ begin
    tcharset.attrib:=1;
 
    {Load Font}
+   LogStatus('ClayWorks','Loading Font');
    if fexist(clay_dir+defaultfont) then
       Vfontin := vfont.load(defaultfont)
    else
@@ -149,6 +156,7 @@ begin
    lightvec.setlight(0,0,0,500,50,10,SC.ColourDepth shr 1);
 
    {Create Clayworks Application}
+   LogStatus('ClayWorks','Creating Application');
    with SC.screenport do
       application := new(claycp.clay,create(0,0,x2,y2));
 
@@ -176,6 +184,8 @@ end;
 
 destructor TClayworks.Destroy();
 begin
+   LogStatus('ClayWorks','Shutting Down');
+
    {Clayworks Flag}
    fin := True;
 
@@ -191,8 +201,9 @@ begin
 
    freemem(textfile,strlen(textfile));
    {freemem(objectinfo,512);}
+
    {if warningsign<>nil then
-   destroybitmap(warningsign);   }
+   destroybitmap(warningsign);}
 
    closegraph;
 
@@ -206,15 +217,15 @@ procedure TClayworks.Execute();
 begin
    while (not ClayFlagQuit) do
    begin
-      {Window.Canvas.SetColour(255,0,0);
-      Window.Canvas.Line(0,0,1000,1000);
-      Window.Canvas.SetColour(0,255,0);
-      Window.Canvas.Rect(100,100,250,250);}
-
-     // application^.draw();
-
       {Poll the Window for OS Messages}
       Window.PumpOSMessages();
+
+      {Poll Clayworks Mouse Events}
+      MPos();
+      EventMPos();
+
+      {Force Render of UI Application}
+      //application^.draw();
    end;
 end;
 
@@ -222,26 +233,26 @@ procedure TClayworks.DoMouseMove(AWindow : TClayWindow; X, Y : SInt32);
 begin
    HostMouseX := X;
    HostMouseY := Y;
-   //MPos();
 end;
 
 procedure TClayworks.DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
 begin
-   //HostMouseX := X;
-   //HostMouseY := Y;
+   HostMouseX := X;
+   HostMouseY := Y;
    HostMouseZ := 1;
-
-   {Trigger Chain}
-   MPos();
-
-   EventMPos();
 end;
 
 procedure TClayworks.DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
 begin
-   //HostMouseX := X;
-   //HostMouseY := Y;
+   HostMouseX := X;
+   HostMouseY := Y;
    HostMouseZ := 0;
+end;
+
+procedure TClayworks.DoWindowClear(AWindow : TClayWindow);
+begin
+   {Just re-render the entire application for now}
+   application^.draw();
 end;
 
 procedure TClayworks.DoKeyDown(AWindow : TClayWindow; AKey : SInt32);
