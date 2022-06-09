@@ -1,13 +1,18 @@
 Unit Ggraph;
 {Generic Graphics unit}
 
-{.$DEFINE VGA256}
-{.$DEFINE XVGA256}
-{.$DEFINE SVGA256}
-{.$DEFINE VGA16}
-{.$DEFINE BITMAP16}
-{.$DEFINE BITMAP25}
-{$DEFINE Win32GDI}
+{$IFDEF MSDOS}
+   {$DEFINE VGA256}
+   {$DEFINE XVGA256}
+   {$DEFINE SVGA256}
+   {$DEFINE VGA16}
+   {$DEFINE BITMAP16}
+   {$DEFINE BITMAP25}
+{$ENDIF}
+
+{$IFDEF Windows}
+   {$DEFINE Win32GDI}
+{$ENDIF}
 
 INTERFACE
 {stuff to be preserved for mouse inter:
@@ -24,57 +29,55 @@ uses
    gbasics,chardef,colour,tmaths;
 
 Const
+   {active and visual page indicies}
+   active:byte=0;
+   visual:byte=1;
 
-{active and visual page indicies}
-active:byte=0;
-visual:byte=1;
+   ctext=$3;
+   bwtext=$2;
+   allplanes=3841;
 
-ctext=$3;
-bwtext=$2;
-allplanes=3841;
-
-{****-mouse draw modes-*****}
-MSdrawold=1;
-MSdrawpointer=2;
-MSdrawboth=3;
+   {****-mouse draw modes-*****}
+   MSdrawold=1;
+   MSdrawpointer=2;
+   MSdrawboth=3;
 
 Type
-Piclist=^piclist_;
-piclist_=array[0..0] of bitmaptypeptr;
+   Piclist=^piclist_;
+   piclist_=array[0..0] of bitmaptypeptr;
 
 const
-Normal=0;
-pingpong=1;
+   Normal=0;
+   pingpong=1;
 type
-Animtype=object
-  numframes,mode,curframe:byte;
-  frames:piclist;
-  direction:shortint;
+   Animtype=object
+      numframes,mode,curframe:byte;
+      frames:piclist;
+      direction:shortint;
 
-  constructor create(mode_,numframes_,start:byte);
-  Procedure Play(x,y:integer);
-  destructor done;
-end;
+      constructor create(mode_,numframes_,start:byte);
+      Procedure Play(x,y:integer);
+      destructor done;
+   end;
 
-set_modeproc=function (mode:byte):boolean;
-GetBitmapProc=function(x1,y1,x2,y2:integer):Bitmaptypeptr;
-PutBitmapProc=procedure(x,y:integer;bitmap:bitmaptypeptr);
-QuadProc=procedure(x1,y1,x2,y2:integer);
-TriProc=procedure(a,b,c:integer);
-GTriAngleProc=procedure(xa,ya,xb,yb,xc,yc,ia,ib,ic:integer);
-TriAngleProc=procedure(xa,ya,xb,yb,xc,yc:integer);
-NoParamProc=procedure;
-PutPixelProc=procedure(x1,y1:integer);
-GetPixelProc=function(x1,y1:integer):byte;
-OutTextxyProc=procedure(x1,y1:integer;txt:string);
-OutTextxylengthProc=procedure(x1,y1:integer;txt:pchar;length:byte);
-DrawBytesProc=procedure(x1,y:Integer;pic:bytearray;nbytes:byte);
-DrawBytesxyProc=procedure(x1,y1:Integer;pic:bytearray;xbytes,ybytes:byte);
-ScreenCopyProc=procedure(x1,y1,x2,y2,xd,yd:integer;page1,page2:byte);
-QwriteProc=procedure(count:word);
-QgetProc=function:byte;
-PolygonProc=procedure(points:pointtypeptr;numpoints:byte);
-
+   set_modeproc=function (mode:byte):boolean;
+   GetBitmapProc=function(x1,y1,x2,y2:integer):Bitmaptypeptr;
+   PutBitmapProc=procedure(x,y:integer;bitmap:bitmaptypeptr);
+   QuadProc=procedure(x1,y1,x2,y2:integer);
+   TriProc=procedure(a,b,c:integer);
+   GTriAngleProc=procedure(xa,ya,xb,yb,xc,yc,ia,ib,ic:integer);
+   TriAngleProc=procedure(xa,ya,xb,yb,xc,yc:integer);
+   NoParamProc=procedure;
+   PutPixelProc=procedure(x1,y1:integer);
+   GetPixelProc=function(x1,y1:integer):byte;
+   OutTextxyProc=procedure(x1,y1:integer;txt:string);
+   OutTextxylengthProc=procedure(x1,y1:integer;txt:pchar;length:byte);
+   DrawBytesProc=procedure(x1,y:Integer;pic:bytearray;nbytes:byte);
+   DrawBytesxyProc=procedure(x1,y1:Integer;pic:bytearray;xbytes,ybytes:byte);
+   ScreenCopyProc=procedure(x1,y1,x2,y2,xd,yd:integer;page1,page2:byte);
+   QwriteProc=procedure(count:word);
+   QgetProc=function:byte;
+   PolygonProc=procedure(points:pointtypeptr;numpoints:byte);
 
 Procedure Qpop;
 Procedure Qpush;
@@ -105,67 +108,69 @@ Procedure SetBitmapContext(data:bitmaptypeptr);
 {Procedure SetGraphicsContext(scrtype:byte;data:dword);}
 
 var
-set_mode:set_modeProc;
-bar,BMbar:QuadProc;
-GTriangle,BMGTriangle:GTriAngleProc;
-Triangle,BMTriangle:TriangleProc;
-polygon,BMpolygon:PolygonProc;
-line,BMline:QuadProc;
-Hline,BMHline:TriProc;
-Vline,BMVline:TriProc;
-ClearDevice,BMClearDevice:NoParamProc;
-putpixel,BMputpixel:putpixelproc;
-getpixel,BMgetpixel:getpixelproc;
-outtextxy,BMouttextxy:outtextxyproc;
-outtextxy_length,BMouttextxy_length:outtextxylengthproc;
-DrawBytes,BMDrawBytes:DrawBytesProc;
-DrawBytesxy,BMDrawBytesxy:DrawBytesxyProc;
-ScreenCopy,BMScreenCopy:ScreencopyProc;
-PutBitmap,BMPutBitmap:PutBitmapProc;
-GetBitmap,BMGetBitmap:GetBitmapProc;
-Qsetxy,BMQsetxy:putpixelproc;
-Qwrite,BMQwrite:QwriteProc;
-Qget,BMQget:Qgetproc;
-savescreenregs:procedure;
-restorescreenregs:procedure;
+   set_mode:set_modeProc;
+   bar,BMbar:QuadProc;
+   GTriangle,BMGTriangle:GTriAngleProc;
+   Triangle,BMTriangle:TriangleProc;
+   polygon,BMpolygon:PolygonProc;
+   line,BMline:QuadProc;
+   Hline,BMHline:TriProc;
+   Vline,BMVline:TriProc;
+   ClearDevice,BMClearDevice:NoParamProc;
+   putpixel,BMputpixel:putpixelproc;
+   getpixel,BMgetpixel:getpixelproc;
+   outtextxy,BMouttextxy:outtextxyproc;
+   outtextxy_length,BMouttextxy_length:outtextxylengthproc;
+   DrawBytes,BMDrawBytes:DrawBytesProc;
+   DrawBytesxy,BMDrawBytesxy:DrawBytesxyProc;
+   ScreenCopy,BMScreenCopy:ScreencopyProc;
+   PutBitmap,BMPutBitmap:PutBitmapProc;
+   GetBitmap,BMGetBitmap:GetBitmapProc;
+   Qsetxy,BMQsetxy:putpixelproc;
+   Qwrite,BMQwrite:QwriteProc;
+   Qget,BMQget:Qgetproc;
+   savescreenregs:procedure;
+   restorescreenregs:procedure;
 
-mousepicadrs:^word;
+   mousepicadrs:^word;
 
 const
-maxgreyfills=31;
-greyfills:array[0..31]of fillpatterntype=((0,0,0,0,0,0,0,0),(0,0,0,0,16,0,0,0),
-(0,0,8,0,0,64,2,0),(0,64,0,2,0,32,4,0),(0,32,4,128,0,16,130,0),
-(0,68,0,17,0,68,0,17),(0,132,32,1,0,84,0,17),(0,34,0,73,0,34,0,73),
-(0,162,0,73,0,170,0,73),(16,170,1,170,16,170,68,9),
-(16,170,65,170,20,170,84,9),(17,170,69,170,17,170,84,9),
-(81,170,69,170,17,170,85,138),(81,170,85,170,17,170,85,170),
-(85,170,81,170,21,170,85,170),(85,170,85,170,85,170,85,170),(85,170,85,170,93,170,85,170),
-(85,170,87,170,117,170,85,170),(87,170,85,170,119,170,85,170),
-(87,170,93,170,119,170,85,186),(119,170,93,170,119,170,213,123),
-(247,170,95,170,245,170,213,123),(247,170,127,170,247,170,221,123),
-(255,174,255,91,255,170,255,91),(255,187,255,214,255,187,255,214),
-(255,111,251,223,255,117,255,221),(255,238,255,187,255,238,255,187),
-(255,239,253,191,255,247,190,255),(255,223,255,254,255,239,253,255),
-(255,255,251,255,255,223,254,255),(255,255,255,255,247,255,255,255),
-(255,255,255,255,255,255,255,255));
+   maxgreyfills=31;
+   greyfills:array[0..31]of fillpatterntype=((0,0,0,0,0,0,0,0),(0,0,0,0,16,0,0,0),
+   (0,0,8,0,0,64,2,0),(0,64,0,2,0,32,4,0),(0,32,4,128,0,16,130,0),
+   (0,68,0,17,0,68,0,17),(0,132,32,1,0,84,0,17),(0,34,0,73,0,34,0,73),
+   (0,162,0,73,0,170,0,73),(16,170,1,170,16,170,68,9),
+   (16,170,65,170,20,170,84,9),(17,170,69,170,17,170,84,9),
+   (81,170,69,170,17,170,85,138),(81,170,85,170,17,170,85,170),
+   (85,170,81,170,21,170,85,170),(85,170,85,170,85,170,85,170),(85,170,85,170,93,170,85,170),
+   (85,170,87,170,117,170,85,170),(87,170,85,170,119,170,85,170),
+   (87,170,93,170,119,170,85,186),(119,170,93,170,119,170,213,123),
+   (247,170,95,170,245,170,213,123),(247,170,127,170,247,170,221,123),
+   (255,174,255,91,255,170,255,91),(255,187,255,214,255,187,255,214),
+   (255,111,251,223,255,117,255,221),(255,238,255,187,255,238,255,187),
+   (255,239,253,191,255,247,190,255),(255,223,255,254,255,239,253,255),
+   (255,255,251,255,255,223,254,255),(255,255,255,255,247,255,255,255),
+   (255,255,255,255,255,255,255,255));
 
-solidfill:fillpatterntype=(255,255,255,255,255,255,255,255);
-emptyfill:fillpatterntype=(0,0,0,0,0,0,0,0);
-midgreyfill:fillpatterntype=(170,85,170,85,170,85,170,85);
+   solidfill:fillpatterntype=(255,255,255,255,255,255,255,255);
+   emptyfill:fillpatterntype=(0,0,0,0,0,0,0,0);
+   midgreyfill:fillpatterntype=(170,85,170,85,170,85,170,85);
 
 var
-{oldscreen:array[0..3999] of byte;}
-oldcrsx,oldcrsy:byte;
+   {oldscreen:array[0..3999] of byte;}
+   oldcrsx,oldcrsy:byte;
 
 IMPLEMENTATION
 
 procedure setlinepattern(pattern:byte;background:boolean);assembler;
 asm
-  {mov al,pattern
-  mov ah,al
-  mov maskword,ax
-  mov al,background
-  mov maskbackground,al}
+   {$IFDEF MSDOS}
+   mov al,pattern
+   mov ah,al
+   mov maskword,ax
+   mov al,background
+   mov maskbackground,al
+   {$ENDIF}
 end;
 
 procedure setfillpattern(const pattern:fillpatterntype;background:boolean);
@@ -542,7 +547,10 @@ Begin
 
     {Init Colours}
     initcolours(SC.colourdepth);
-    {getmem(SC.startoffsets,SC.Size.y shl 1);}
+
+    {$IFDEF MSDOS}
+    getmem(SC.startoffsets,SC.Size.y shl 1);
+    {$ENDIF}
 
     tempoffset:=0;
 
@@ -571,12 +579,17 @@ Procedure CloseGraph;
 begin
   {while CheckForFade do;}
   DoneColours;
-  {freemem(SC.startoffsets,SC.Size.y shl 1);}
-  {asm
 
+   {$IFDEF MSDOS}
+   freemem(SC.startoffsets,SC.Size.y shl 1);
+
+   asm
       mov al,ctext;
       mov ah,0;
-  int 10h end;}
+      int 10h
+   end;
+   {$ENDIF}
+
   {setcurs(oldcrsx,oldcrsy);}
 end;
 
@@ -610,38 +623,49 @@ SMoldoffset:Dword;
 
 Procedure Qpush;assembler;
 asm
-  {mov ax,word ptr SC.qoffset
-  mov word ptr SMoldoffset,ax }
+   {$IFDEF MSDOS}
+   mov ax,word ptr SC.qoffset
+   mov word ptr SMoldoffset,ax
+   {$ENDIF}
 end;
 
 Procedure Qpop;assembler;
 asm
-  {mov ax,word ptr SMoldoffset
-  mov word ptr SC.qoffset,ax}
+   {$IFDEF MSDOS}
+   mov ax,word ptr SMoldoffset
+   mov word ptr SC.qoffset,ax
+   {$ENDIF}
 end;
 
 Procedure Qnextline;
 begin
-  inc(SC.qoffset,SC.offsd);
+   {$IFDEF MSDOS}
+   inc(SC.qoffset,SC.offsd);
+   {$ENDIF}
 end;
 
 
 Procedure BMQpush;assembler;
 asm
- { mov ax,word ptr BC.qoffset
-  mov word ptr BMoldoffset,ax }
+   {$IFDEF MSDOS}
+   mov ax,word ptr BC.qoffset
+   mov word ptr BMoldoffset,ax
+   {$ENDIF}
 end;
 
 Procedure BMQpop;assembler;
 asm
-
-  {mov ax,word ptr BMoldoffset
-  mov word ptr BC.qoffset,ax}
+   {$IFDEF MSDOS}
+   mov ax,word ptr BMoldoffset
+   mov word ptr BC.qoffset,ax
+   {$ENDIF}
 end;
 
 Procedure BMQnextline;
 begin
-  inc(BC.qoffset,BC.offsd);
+   {$IFDEF MSDOS}
+   inc(BC.qoffset,BC.offsd);
+   {$ENDIF}
 end;
 
 {------------------****Animation stuff****---------------------}
@@ -677,8 +701,8 @@ end;
 begin
 {load in default font}
    fillchar(tcharset,255*fontheight,0);
+   {$IFDEF MSDOS}
    asm
-    (*
     {get address of 8 pixel high font}
     mov ah,$35
     mov al,fontintr
@@ -702,8 +726,9 @@ begin
       loop @byteloop
       add si,fontheight shr 1
       pop cx
-    loop @copyloop*)
-  end;
+    loop @copyloop
+   end;
+   {$ENDIF}
 End.
 
 

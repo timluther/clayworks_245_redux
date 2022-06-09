@@ -16,380 +16,379 @@ uses
    twinb,twindraw,views,gadgets,cdialog,tdwin,tmenust,pcx256;
 
 const
-VersionStr='2.45';
+   VersionStr='2.45';
 
-{With debug 'writes'
-fixedusage=150928;}
-fixedusage=150848;
-minmem=200000;
+   {With debug 'writes'
+   fixedusage=150928;}
+   fixedusage=150848;
+   minmem=200000;
 
-defaultfont='trip.chr';
+   defaultfont='trip.chr';
 
-CMDxrot                =1000;
-CMDyrot                =1001;
-CMDzrot                =1002;
+   CMDxrot                =1000;
+   CMDyrot                =1001;
+   CMDzrot                =1002;
 
-CMDexitbox             =1004;
-CMDnewbox              =1005;
-CMDloaddialog          =1007;
+   CMDexitbox             =1004;
+   CMDnewbox              =1005;
+   CMDloaddialog          =1007;
 
-CMDsaveasdialog        =1008;
-CMDappend              =1009;
-CMDprint               =1010;
-CMDexit                =1011;
+   CMDsaveasdialog        =1008;
+   CMDappend              =1009;
+   CMDprint               =1010;
+   CMDexit                =1011;
 
-CMDrefresh             =1012;
-CMDinfo                =1013;
-CMDredrawobject        =1014;
-CMDgetobjectinfo       =1015;
+   CMDrefresh             =1012;
+   CMDinfo                =1013;
+   CMDredrawobject        =1014;
+   CMDgetobjectinfo       =1015;
 
-CMDdeleteselectdialog  =1018;
+   CMDdeleteselectdialog  =1018;
 
-CMDTogglegridFROMICON  =1051;
-CMDsetwinbig           =1052;
-{CMDTilewindows         =1025;
-CMDCascade             =1026;}
-CMDcallwindowmenu      =1053;
-CMDtogglegrid          =1054;
-CMDsetdefaultpal       =1055;
+   CMDTogglegridFROMICON  =1051;
+   CMDsetwinbig           =1052;
+   {CMDTilewindows         =1025;
+   CMDCascade             =1026;}
+   CMDcallwindowmenu      =1053;
+   CMDtogglegrid          =1054;
+   CMDsetdefaultpal       =1055;
 
-CMDrotateopts          =1056;
-CMDzoomin              =1057;
-CMDzoomout             =1058;
-CMDselectCircChanger   =1061;
+   CMDrotateopts          =1056;
+   CMDzoomin              =1057;
+   CMDzoomout             =1058;
+   CMDselectCircChanger   =1061;
 
-{file ops}
-CMDloadfont            =1064;
-CMDCancel              =1065;
-CMDsave3dfileornot     =1066;
-CMDapplytextstring     =1067;
+   {file ops}
+   CMDloadfont            =1064;
+   CMDCancel              =1065;
+   CMDsave3dfileornot     =1066;
+   CMDapplytextstring     =1067;
 
-CMDToggleExtrude       =1073;
-CMDToggleConnect       =1074;
-CMDtoggleSine          =1075;
-CMDcallhelp            =1076;
-CMDtogglecheck         =1077;
+   CMDToggleExtrude       =1073;
+   CMDToggleConnect       =1074;
+   CMDtoggleSine          =1075;
+   CMDcallhelp            =1076;
+   CMDtogglecheck         =1077;
 
-CMDtogglenodes         =1078;
-CMDtoggleDoubleSided   =1087;
-CMDtoggleSmooth        =1088;
-CMDtoggleAbsolute      =1089;
-CMDtoggleOutline       =1090;
-CMDToggleNodesFROMICON =1094;
-CMDcallsurfacedialog   =1095;
-CMDsavepal             =2000;
-CMDsavepaldialog       =2001;
-CMDtoggleflat          =2002;
-CMDtoggleheightmap     =2003;
-CMDloadheightmapdialog =2004;
-CMDloadheightmap       =2005;
-CMDstickymouse         =2006;
+   CMDtogglenodes         =1078;
+   CMDtoggleDoubleSided   =1087;
+   CMDtoggleSmooth        =1088;
+   CMDtoggleAbsolute      =1089;
+   CMDtoggleOutline       =1090;
+   CMDToggleNodesFROMICON =1094;
+   CMDcallsurfacedialog   =1095;
+   CMDsavepal             =2000;
+   CMDsavepaldialog       =2001;
+   CMDtoggleflat          =2002;
+   CMDtoggleheightmap     =2003;
+   CMDloadheightmapdialog =2004;
+   CMDloadheightmap       =2005;
+   CMDstickymouse         =2006;
 
 type
 
-Lgroup=^Lgroup_;
-Lgroup_=object(tgroup_)
-  name:string[20];
-  xoffset:integer;
-  Constructor create(name_:string);
-  procedure draw;virtual;
-end;
+   Lgroup=^Lgroup_;
+   Lgroup_=object(tgroup_)
+     name:string[20];
+     xoffset:integer;
+     Constructor create(name_:string);
+     procedure draw;virtual;
+   end;
 
-Coordbox=^Coordbox_;
-Coordbox_=object(tview_)
-  coord:vectorreal;
-  procedure draw;virtual;
-end;
+   Coordbox=^Coordbox_;
+   Coordbox_=object(tview_)
+     coord:vectorreal;
+     procedure draw;virtual;
+   end;
 
-Clay=^Clay_;
-Clay_=object(tgroup_)
-  Coords:Coordbox;
-  ModeOptions:Tgroup;
-  ModeOptionsPtrs:array[0..11]of Lgroup;
-  iconpanel,subpanel:iconpaneltype;
+   Clay=^Clay_;
+   Clay_=object(tgroup_)
+     Coords:Coordbox;
+     ModeOptions:Tgroup;
+     ModeOptionsPtrs:array[0..11]of Lgroup;
+     iconpanel,subpanel:iconpaneltype;
 
 
-  Constructor create(xa,ya,xb,yb:integer);
-  Procedure handlevent(var event:tevent);virtual;
-  procedure Draw;virtual;
-end;
+     Constructor create(xa,ya,xb,yb:integer);
+     Procedure handlevent(var event:tevent);virtual;
+     procedure Draw;virtual;
+   end;
 
-RotationControl=^RotationControl_;
-RotationControl_=object(tgroup_)
-  constructor create(xa,ya:integer);
-  procedure handlevent(var event:tevent);virtual;
-end;
+   RotationControl=^RotationControl_;
+   RotationControl_=object(tgroup_)
+     constructor create(xa,ya:integer);
+     procedure handlevent(var event:tevent);virtual;
+   end;
 
-TextEditdialog=^TextEditdialog_;
-TextEditdialog_=object(Lgroup_)
-  TextEditBox:edittexttype;
-  constructor create;
-  procedure handlevent(var event:tevent);virtual;
-end;
+   TextEditdialog=^TextEditdialog_;
+   TextEditdialog_=object(Lgroup_)
+     TextEditBox:edittexttype;
+     constructor create;
+     procedure handlevent(var event:tevent);virtual;
+   end;
 
-SelectOptions=^SelectOptions_;
-SelectOptions_=object(Lgroup_)
-  seliconpanel,selmodeiconpanel:iconpaneltype;
-  constructor create;
-  procedure handlevent(var event:tevent);virtual;
-  procedure draw;virtual;
-end;
+   SelectOptions=^SelectOptions_;
+   SelectOptions_=object(Lgroup_)
+     seliconpanel,selmodeiconpanel:iconpaneltype;
+     constructor create;
+     procedure handlevent(var event:tevent);virtual;
+     procedure draw;virtual;
+   end;
 
-CircOptions=^CircOptions_;
-CircOptions_=object(Lgroup_)
-  Constructor create(name_:string;data:pointer);
-  Procedure Handlevent(var event:tevent);virtual;
-  Procedure draw;virtual;
-end;
+   CircOptions=^CircOptions_;
+   CircOptions_=object(Lgroup_)
+     Constructor create(name_:string;data:pointer);
+     Procedure Handlevent(var event:tevent);virtual;
+     Procedure draw;virtual;
+   end;
 
-SphereOptions=^SphereOptions_;
-SphereOptions_=object(Lgroup_)
-  Constructor create(size:pointtypeptr);
-  Procedure Handlevent(var event:tevent);virtual;
-  Procedure draw;virtual;
-end;
+   SphereOptions=^SphereOptions_;
+   SphereOptions_=object(Lgroup_)
+     Constructor create(size:pointtypeptr);
+     Procedure Handlevent(var event:tevent);virtual;
+     Procedure draw;virtual;
+   end;
 
-RotateOptions=^RotateOptions_;
-RotateOptions_=object(lgroup_)
-  Constructor create(name_:string;data:pointer);
-  Procedure Handlevent(var event:tevent);virtual;
-  Procedure draw;virtual;
-end;
+   RotateOptions=^RotateOptions_;
+   RotateOptions_=object(lgroup_)
+     Constructor create(name_:string;data:pointer);
+     Procedure Handlevent(var event:tevent);virtual;
+     Procedure draw;virtual;
+   end;
 
-GridOptions=^GridOptions_;
-GridOptions_=object(Lgroup_)
-  Xval,Yval:Valuetype;
-  Constructor create;
-  Procedure Handlevent(var event:tevent);virtual;
-  Procedure draw;virtual;
-end;
+   GridOptions=^GridOptions_;
+   GridOptions_=object(Lgroup_)
+     Xval,Yval:Valuetype;
+     Constructor create;
+     Procedure Handlevent(var event:tevent);virtual;
+     Procedure draw;virtual;
+   end;
 
-CopyRightBox=^CopyRightBox_;
-CopyRightBox_=object(Tview_)
-  Constructor create;
-  Procedure HandlEvent(var event:tevent);virtual;
-  Procedure Draw;virtual;
-end;
+   CopyRightBox=^CopyRightBox_;
+   CopyRightBox_=object(Tview_)
+     Constructor create;
+     Procedure HandlEvent(var event:tevent);virtual;
+     Procedure Draw;virtual;
+   end;
 
-SurfaceDialog=^SurfaceDialog_;
-SurfaceDialog_=object(tgroup_)
-  colourgridptr:colourgridtype;
-  Constructor create(xa,ya:integer);
-  Procedure HandlEvent(var event:tevent);virtual;
-  Procedure Draw;virtual;
-end;
+   SurfaceDialog=^SurfaceDialog_;
+   SurfaceDialog_=object(tgroup_)
+     colourgridptr:colourgridtype;
+     Constructor create(xa,ya:integer);
+     Procedure HandlEvent(var event:tevent);virtual;
+     Procedure Draw;virtual;
+   end;
 
 
 {****----Predeclared Global Variables----****}
 var
-flipmenu,FileTypeMenu,PolyFunctions,PolyAttribFunctions,
-miscmenu,filemenu,editmenu,selectmenu,textmenu,
-Windowmenu,stdwinmenu,winmenu3d,rendermenu:Tpopupmenu_;
+   flipmenu,FileTypeMenu,PolyFunctions,PolyAttribFunctions,
+   miscmenu,filemenu,editmenu,selectmenu,textmenu,
+   Windowmenu,stdwinmenu,winmenu3d,rendermenu:Tpopupmenu_;
 
 Const
-backpattern:fillpatterntype=(226,193,163,119,46,28,58,119);
+   backpattern:fillpatterntype=(226,193,163,119,46,28,58,119);
 
-Flipinfo:array[0..2] of tmenuitem_=(
-(name:'üýX';attrib:moptbutton;keycode:0;command:CMDflipx;submenu:nil),
-(name:'üýY';attrib:moptbutton;keycode:0;command:CMDflipY;submenu:nil),
-(name:'üýZ';attrib:moptbutton;keycode:0;command:CMDflipZ;submenu:nil));
+   Flipinfo:array[0..2] of tmenuitem_=(
+   (name:'üýX';attrib:moptbutton;keycode:0;command:CMDflipx;submenu:nil),
+   (name:'üýY';attrib:moptbutton;keycode:0;command:CMDflipY;submenu:nil),
+   (name:'üýZ';attrib:moptbutton;keycode:0;command:CMDflipZ;submenu:nil));
 
-FileTypeinfo:array[0..9] of tmenuitem_=(
-(name:'3d'; attrib:moptbutton+Moptcentre;keycode:0;command:CMD3dfile;submenu:nil),
-(name:'POV'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDPOVfile;submenu:nil),
-(name:'RWX'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDRWfile;submenu:nil),
-(name:'OBJ'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDOBJfile;submenu:nil),
-(name:'PLG'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDPLGfile;submenu:nil),
-(name:'GEO'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDGEOfile;submenu:nil),
-(name:'VRML';attrib:moptbutton+Moptcentre;keycode:0;command:CMDVRMLfile;submenu:nil),
-(name:'3ds';attrib:moptbutton+Moptcentre;keycode:0;command:CMD3dsfile;submenu:nil),
-(name:'GOR';attrib:moptbutton+Moptcentre;keycode:0;command:CMDgorfile;submenu:nil),
-(name:'JAVA';attrib:moptbutton+Moptcentre;keycode:0;command:CMDJAVAfile;submenu:nil));
-miscinfo:array[0..3] of tmenuitem_=(
-(name:'About';attrib:0;keycode:0;command:CMDinfo;submenu:nil),
-(name:'Refresh display';attrib:0;keycode:0;command:CMDrefresh;submenu:nil),
-(name:'Object information';attrib:0;keycode:0;command:CMDgetobjectinfo;submenu:nil;extratext:''),
-(name:'Help!';attrib:0;keycode:0;command:CMDcallhelp;submenu:nil;extratext:'F1'));
-
-
-Fileinfo:array[0..7] of tmenuitem_=(
-(name:'New..     ';attrib:0;keycode:0;command:CMDnewbox;submenu:nil;extratext:'þÿF1'),
-(name:'Load..    ';attrib:0;keycode:0;command:CMDloaddialog;submenu:@filetypemenu;extratext:'þÿF2'),
-(name:'Save      ';attrib:0;keycode:0;command:CMDsave3dfile;submenu:nil;extratext:'þÿF5'),
-(name:'Save as.. ';attrib:0;keycode:0;command:CMDsaveasdialog;submenu:@filetypemenu;extratext:'þÿF3'),
-(name:'Append..  ';attrib:0;keycode:0;command:CMDappend;submenu:@filetypemenu;extratext:'þÿF6'),
-(name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
-(name:'Print..';attrib:MoptDisabled;keycode:0;command:CMDprint;submenu:nil),
-(name:'Exit      ';attrib:0;keycode:0;command:CMDexitbox;submenu:nil;extratext:'þÿF4'));
-
-Editinfo:array[0..13] of tmenuitem_=(
-(name:'Undo     ';  attrib:0;keycode:0;  command:CMDundo;  submenu:nil;extratext:'üýU'),
-(name:'';  attrib:moptseperator;keycode:0;  command:CMDeditselect;  submenu:nil),
-(name:'Select   ';  attrib:0;keycode:0;  command:CMDeditselect;  submenu:nil;extratext:'üýS'),
-(name:'Square   ';  attrib:0;keycode:0;  command:CMDeditsquare;  submenu:nil;extratext:'üýQ'),
-(name:'Cube     ';    attrib:0;keycode:0;  command:CMDeditcube;    submenu:nil;extratext:'üýC'),
-(name:'Dot      ';     attrib:0;keycode:0;  command:CMDeditdot;     submenu:nil;extratext:'üýD'),
-(name:'Liner    ';   attrib:0;keycode:0;  command:CMDeditliner;   submenu:nil;extratext:'üýL'),
-(name:'Cone     ';    attrib:0;keycode:0;  command:CMDeditcone;    submenu:nil;extratext:'üýO'),
-(name:'Circle   ';  attrib:0;keycode:0;  command:CMDeditcircle;  submenu:nil;extratext:'üýI'),
-(name:'Cylinder ';attrib:0;keycode:0;  command:CMDeditcylinder;submenu:nil;extratext:'üýR'),
-(name:'Sphere   ';  attrib:0;keycode:0;  command:CMDeditsphere;  submenu:nil;extratext:'üýP'),
-(name:'Rotate   ';  attrib:0;keycode:0;  command:CMDeditrotate;  submenu:nil;extratext:'üýF'),
-(name:'Text     ';    attrib:0;keycode:0;  command:CMDedittext;    submenu:nil;extratext:'üýT'),
-(name:'Grid     ';    attrib:0;keycode:0;  command:CMDeditgrid;    submenu:nil;extratext:'üýG'));
-
-textinfo:array[0..0] of tmenuitem_=(
-(name:'Load font';attrib:0;keycode:0;command:CMDloadfontdialog;submenu:nil));
-
-PolyFunctionsinfo:array[0..6] of tmenuitem_=(
-(name:'QuadDivide   þÿQ';attrib:0;keycode:0;command:CMDQuadDivide   ;submenu:nil),
-(name:'Triangulate  þÿT';attrib:0;keycode:0;command:CMDtriangulate  ;submenu:nil),
-(name:'Split        þÿD';attrib:0;keycode:0;command:CMDsplit        ;submenu:nil),
-(name:'Flip normals þÿF';attrib:0;keycode:0;command:CMDflipnorms    ;submenu:nil),
-(name:'Add          þÿY';attrib:0;keycode:0;command:CMDaddpolygon   ;submenu:nil),
-(name:'Delete     BKSPC';attrib:0;keycode:0;command:CMDdeletepolys  ;submenu:nil),
-(name:'Set Attributes >';attrib:0;keycode:0;command:0 ;submenu:@PolyAttribfunctions));
-
-PolyAttribFunctionsinfo:array[0..5] of tmenuitem_=(
-(name:'Double sided ';attrib:0;keycode:0;command:CMDmkDoublesided;submenu:nil;extratext:'þÿB'),
-(name:'Single sided ';attrib:0;keycode:0;command:CMDmkSinglesided;submenu:nil;extratext:'þÿS'),
-(name:'Smooth       ';attrib:0;keycode:0;command:CMDmkSmooth     ;submenu:nil;extratext:'þÿV'),
-(name:'Flat         ';attrib:0;keycode:0;command:CMDmkFlat       ;submenu:nil;extratext:'þÿO'),
-(name:'Outline      ';attrib:0;keycode:0;command:CMDmkOutlined     ;submenu:nil;extratext:''),
-(name:'Solid        ';attrib:0;keycode:0;command:CMDmkSolid       ;submenu:nil;extratext:''));
-
-Selectinfo:array[0..8] of tmenuitem_=(
-(name:'Select all     ';attrib:0;keycode:0;command:CMDselectall;submenu:nil;extratext:'þÿJ'),
-(name:'Show All Nodes ';attrib:mopttoggler;keycode:0;command:CMDtogglenodes;submenu:nil;extratext:'þÿN';
-toggleref:@drawallnodes),
-(name:'Sticky mouse ';attrib:mopttoggler;keycode:0;command:CMDstickymouse;submenu:nil;extratext:'þÿN';toggleref:@stickymouse),
-(name:'Copy           ';attrib:0;keycode:0;command:CMDautocopyselected;submenu:nil;extratext:'þÿC'),
-(name:'Clear          ';attrib:0;keycode:0;command:CMDselectclear;submenu:nil;extratext:'þÿL'),
-(name:'Delete         ';attrib:0;keycode:0;command:CMDdeleteselectdialog;submenu:nil;extratext:'del'),
-(name:'Merge          ';attrib:0;keycode:0;command:CMDmerge;submenu:nil;extratext:'þÿM'),
-{(name:'Rotated Form      >';attrib:0;keycode:0;command:0;submenu:@rotatemenu),}
-(name:'Flip object       ';attrib:0;keycode:0;command:0;submenu:@flipmenu;extratext:'>'),
-(name:'Polygons          ';attrib:0;keycode:0;command:0;submenu:@PolyFunctions;extratext:'>'));
-
-Windowinfo:array[0..2] of tmenuitem_=(
-({name:'Tile';attrib:0;keycode:0;command:CMDtilewindows;submenu:nil),
-(name:'Cascade';attrib:0;keycode:0;command:CMDcascade;submenu:nil),}
- name:'Grid    ';attrib:MoptToggler;keycode:0;command:CMDtogglegrid;submenu:nil;extratext:'þÿG ';toggleref:@grid_on),
-(name:'Default pal';attrib:0;keycode:0;command:CMDsetdefaultpal;submenu:nil),
-(name:'Save pal...';attrib:0;keycode:0;command:CMDsavepaldialog;submenu:nil));
-
-Renderinfo:array[0..5] of tmenuitem_=(
-(name:'Dots            ';attrib:0;keycode:0;command:CMDDots;submenu:nil;extratext:'[1]'),
-(name:'Lines           ';attrib:0;keycode:0;command:CMDlines;submenu:nil;extratext:'[2]'),
-(name:'Hidden lines    ';attrib:0;keycode:0;command:CMDHlines;submenu:nil;extratext:'[3]'),
-(name:'Flat shaded     ';attrib:0;keycode:0;command:CMDlsource;submenu:nil;extratext:'[4]'),
-(name:'Smooth shaded   ';attrib:0;keycode:0;command:CMDgouraud;submenu:nil;extratext:'[5]'),
-(name:'By Attribute    ';attrib:0;keycode:0;command:CMDCpolygons;submenu:nil;extratext:'[6]'));
-
-StdWindowinfo:array[0..2]of tmenuitem_=(
-(name:'Centre [Home]';attrib:0;keycode:0;command:CMDcentrewindow;submenu:nil),
-(name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
-(name:'Save Window';attrib:0;keycode:0;command:CMDsavewin;submenu:nil));
-
-windowinfo3d:array[0..3] of tmenuitem_=(
-(name:'Centre   [Home]';attrib:0;keycode:0;command:CMDcentrewindow;submenu:nil),
-(name:'Reset 3d  [TAB]';attrib:0;keycode:0;command:CMDreset3dvalues;submenu:nil),
-(name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
-(name:'Render depth  >';attrib:0;keycode:0;command:CMDredrawobject3d;submenu:@rendermenu));
-
-titleinfo:array[0..5] of tmenuitem_=(
-(name:chr(9);attrib:0;keycode:0;command:0;submenu:@miscmenu),
-(name:'File';attrib:0;keycode:0;command:0;submenu:@filemenu),
-(name:'Draw';attrib:0;keycode:0;command:0;submenu:@editmenu),
-(name:'Select';attrib:0;keycode:0;command:0;submenu:@selectmenu),
-(name:'Text';attrib:0;keycode:0;command:0;submenu:@textmenu),
-(name:'Window';attrib:0;keycode:0;command:0;submenu:@windowmenu));
-
-Extentions:array[0..10]of string[5]=('*.3D','*.RWX','*.POV','*.OBJ','*.GEO','*.WRL','*.PLG','*.ASC','*.GOR','*.COB','*.JAV');
+   FileTypeinfo:array[0..9] of tmenuitem_=(
+   (name:'3d'; attrib:moptbutton+Moptcentre;keycode:0;command:CMD3dfile;submenu:nil),
+   (name:'POV'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDPOVfile;submenu:nil),
+   (name:'RWX'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDRWfile;submenu:nil),
+   (name:'OBJ'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDOBJfile;submenu:nil),
+   (name:'PLG'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDPLGfile;submenu:nil),
+   (name:'GEO'; attrib:moptbutton+Moptcentre;keycode:0;command:CMDGEOfile;submenu:nil),
+   (name:'VRML';attrib:moptbutton+Moptcentre;keycode:0;command:CMDVRMLfile;submenu:nil),
+   (name:'3ds';attrib:moptbutton+Moptcentre;keycode:0;command:CMD3dsfile;submenu:nil),
+   (name:'GOR';attrib:moptbutton+Moptcentre;keycode:0;command:CMDgorfile;submenu:nil),
+   (name:'JAVA';attrib:moptbutton+Moptcentre;keycode:0;command:CMDJAVAfile;submenu:nil));
+   miscinfo:array[0..3] of tmenuitem_=(
+   (name:'About';attrib:0;keycode:0;command:CMDinfo;submenu:nil),
+   (name:'Refresh display';attrib:0;keycode:0;command:CMDrefresh;submenu:nil),
+   (name:'Object information';attrib:0;keycode:0;command:CMDgetobjectinfo;submenu:nil;extratext:''),
+   (name:'Help!';attrib:0;keycode:0;command:CMDcallhelp;submenu:nil;extratext:'F1'));
 
 
-icons:array[0..11,0..31]of byte=(
-(0,0,8,0,12,0,14,0,15,0,15,128,15,192,15,224,15,240,15,248,15,128,13,192,8,192,0,96,0,96,0,0),
-(0,0,0,0,63,252,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,63,252,0,0),
-(0,128,3,224,15,248,63,254,127,175,127,93,94,177,107,193,85,129,106,129,85,129,42,129,85,134,10,152,5,224,0,128),
-(0,0,0,0,0,0,0,0,0,0,0,0,3,192,2,64,2,64,3,192,0,0,0,0,0,0,0,0,0,0,0,0),
-(0,0,0,30,0,18,0,18,0,30,0,32,0,64,0,128,1,0,2,0,4,0,120,0,72,0,72,0,120,0,0,0),
-(0,128,1,64,1,192,3,32,2,160,7,16,6,144,15,8,14,136,29,4,30,132,61,2,62,130,63,4,30,152,3,224),
-(0,0,0,0,3,192,12,48,16,8,32,4,32,4,64,2,64,2,64,2,32,4,32,4,16,8,12,48,3,192,0,0),
-(7,240,24,12,32,2,56,14,63,242,61,2,62,2,61,2,62,2,61,2,62,2,61,2,62,2,61,4,30,24,7,240),
-(0,0,7,240,31,184,63,196,127,234,127,194,255,169,255,192,191,169,213,0,170,161,64,0,74,2,32,4,24,8,6,160),
-(0,0,1,0,10,0,21,0,26,64,31,96,31,240,31,248,31,252,31,254,31,252,15,248,7,240,0,96,0,64,0,0),
-(0,0,0,0,63,254,36,146,36,146,63,254,36,146,36,146,63,254,36,146,36,146,63,254,36,146,36,146,63,254,0,0),
-(0,0,0,0,127,254,97,134,65,130,1,128,1,128,1,128,1,128,1,128,1,128,1,128,1,128,1,128,7,224,0,0)
-);
+   Fileinfo:array[0..7] of tmenuitem_=(
+   (name:'New..     ';attrib:0;keycode:0;command:CMDnewbox;submenu:nil;extratext:'þÿF1'),
+   (name:'Load..    ';attrib:0;keycode:0;command:CMDloaddialog;submenu:@filetypemenu;extratext:'þÿF2'),
+   (name:'Save      ';attrib:0;keycode:0;command:CMDsave3dfile;submenu:nil;extratext:'þÿF5'),
+   (name:'Save as.. ';attrib:0;keycode:0;command:CMDsaveasdialog;submenu:@filetypemenu;extratext:'þÿF3'),
+   (name:'Append..  ';attrib:0;keycode:0;command:CMDappend;submenu:@filetypemenu;extratext:'þÿF6'),
+   (name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
+   (name:'Print..';attrib:MoptDisabled;keycode:0;command:CMDprint;submenu:nil),
+   (name:'Exit      ';attrib:0;keycode:0;command:CMDexitbox;submenu:nil;extratext:'þÿF4'));
 
-iconsattr:array[0..11] of byte=(oneon+1,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon);
-iconscommands:array[0..11] of word=(
-CMDeditselect,CMDeditsquare,CMDeditcube,
-CMDeditDot,CMDeditLiner,CMDeditcone,CMDeditCircle,CMDeditCylinder,
-CMDeditSphere,CMDeditRotate,CMDeditgrid,CMDedittext);
+   Editinfo:array[0..13] of tmenuitem_=(
+   (name:'Undo     ';  attrib:0;keycode:0;  command:CMDundo;  submenu:nil;extratext:'üýU'),
+   (name:'';  attrib:moptseperator;keycode:0;  command:CMDeditselect;  submenu:nil),
+   (name:'Select   ';  attrib:0;keycode:0;  command:CMDeditselect;  submenu:nil;extratext:'üýS'),
+   (name:'Square   ';  attrib:0;keycode:0;  command:CMDeditsquare;  submenu:nil;extratext:'üýQ'),
+   (name:'Cube     ';    attrib:0;keycode:0;  command:CMDeditcube;    submenu:nil;extratext:'üýC'),
+   (name:'Dot      ';     attrib:0;keycode:0;  command:CMDeditdot;     submenu:nil;extratext:'üýD'),
+   (name:'Liner    ';   attrib:0;keycode:0;  command:CMDeditliner;   submenu:nil;extratext:'üýL'),
+   (name:'Cone     ';    attrib:0;keycode:0;  command:CMDeditcone;    submenu:nil;extratext:'üýO'),
+   (name:'Circle   ';  attrib:0;keycode:0;  command:CMDeditcircle;  submenu:nil;extratext:'üýI'),
+   (name:'Cylinder ';attrib:0;keycode:0;  command:CMDeditcylinder;submenu:nil;extratext:'üýR'),
+   (name:'Sphere   ';  attrib:0;keycode:0;  command:CMDeditsphere;  submenu:nil;extratext:'üýP'),
+   (name:'Rotate   ';  attrib:0;keycode:0;  command:CMDeditrotate;  submenu:nil;extratext:'üýF'),
+   (name:'Text     ';    attrib:0;keycode:0;  command:CMDedittext;    submenu:nil;extratext:'üýT'),
+   (name:'Grid     ';    attrib:0;keycode:0;  command:CMDeditgrid;    submenu:nil;extratext:'üýG'));
 
-Icons2:array[0..5,0..31] of byte=(
-(0,0,7,128,8,64,22,32,20,32,16,32,16,32,8,96,7,240,0,56,12,28,12,14,63,6,63,0,12,0,12,0),
-(0,0,7,128,8,64,22,32,20,32,16,32,16,32,8,96,7,240,0,56,0,28,0,14,63,6,63,0,0,0,0,0),
-(0,0,169,98,173,85,171,85,73,98,0,0,0,0,6,0,12,0,31,210,63,232,31,210,12,0,6,0,0,0,0,0),
-(0,0,3,192,7,224,14,112,12,48,12,48,12,48,31,248,31,0,30,136,31,0,30,136,31,0,30,136,31,240,0,0),
-(0,0,3,192,3,192,7,224,0,0,0,0,3,192,2,64,2,64,3,192,0,0,0,0,0,0,3,192,7,224,0,0),
-(0,0,96,6,112,14,56,30,28,60,6,112,3,192,1,128,3,192,6,96,12,48,28,24,56,12,112,14,48,6,0,0));
-icons2attr:array[0..5] of byte=(nostick,nostick,nostick,onoff,1+onoff,nostick);
-icons2commands:array[0..5] of word=(CMDzoomin,CMDzoomout,CMDundo,CMDtogglegridFROMICON,CMDtoggleNodesFROMICON,CMDnewbox);
+   textinfo:array[0..0] of tmenuitem_=(
+   (name:'Load font';attrib:0;keycode:0;command:CMDloadfontdialog;submenu:nil));
+
+   PolyFunctionsinfo:array[0..6] of tmenuitem_=(
+   (name:'QuadDivide   þÿQ';attrib:0;keycode:0;command:CMDQuadDivide   ;submenu:nil),
+   (name:'Triangulate  þÿT';attrib:0;keycode:0;command:CMDtriangulate  ;submenu:nil),
+   (name:'Split        þÿD';attrib:0;keycode:0;command:CMDsplit        ;submenu:nil),
+   (name:'Flip normals þÿF';attrib:0;keycode:0;command:CMDflipnorms    ;submenu:nil),
+   (name:'Add          þÿY';attrib:0;keycode:0;command:CMDaddpolygon   ;submenu:nil),
+   (name:'Delete     BKSPC';attrib:0;keycode:0;command:CMDdeletepolys  ;submenu:nil),
+   (name:'Set Attributes >';attrib:0;keycode:0;command:0 ;submenu:@PolyAttribfunctions));
+
+   PolyAttribFunctionsinfo:array[0..5] of tmenuitem_=(
+   (name:'Double sided ';attrib:0;keycode:0;command:CMDmkDoublesided;submenu:nil;extratext:'þÿB'),
+   (name:'Single sided ';attrib:0;keycode:0;command:CMDmkSinglesided;submenu:nil;extratext:'þÿS'),
+   (name:'Smooth       ';attrib:0;keycode:0;command:CMDmkSmooth     ;submenu:nil;extratext:'þÿV'),
+   (name:'Flat         ';attrib:0;keycode:0;command:CMDmkFlat       ;submenu:nil;extratext:'þÿO'),
+   (name:'Outline      ';attrib:0;keycode:0;command:CMDmkOutlined     ;submenu:nil;extratext:''),
+   (name:'Solid        ';attrib:0;keycode:0;command:CMDmkSolid       ;submenu:nil;extratext:''));
+
+   Selectinfo:array[0..8] of tmenuitem_=(
+   (name:'Select all     ';attrib:0;keycode:0;command:CMDselectall;submenu:nil;extratext:'þÿJ'),
+   (name:'Show All Nodes ';attrib:mopttoggler;keycode:0;command:CMDtogglenodes;submenu:nil;extratext:'þÿN';
+   toggleref:@drawallnodes),
+   (name:'Sticky mouse ';attrib:mopttoggler;keycode:0;command:CMDstickymouse;submenu:nil;extratext:'þÿN';toggleref:@stickymouse),
+   (name:'Copy           ';attrib:0;keycode:0;command:CMDautocopyselected;submenu:nil;extratext:'þÿC'),
+   (name:'Clear          ';attrib:0;keycode:0;command:CMDselectclear;submenu:nil;extratext:'þÿL'),
+   (name:'Delete         ';attrib:0;keycode:0;command:CMDdeleteselectdialog;submenu:nil;extratext:'del'),
+   (name:'Merge          ';attrib:0;keycode:0;command:CMDmerge;submenu:nil;extratext:'þÿM'),
+   {(name:'Rotated Form      >';attrib:0;keycode:0;command:0;submenu:@rotatemenu),}
+   (name:'Flip object       ';attrib:0;keycode:0;command:0;submenu:@flipmenu;extratext:'>'),
+   (name:'Polygons          ';attrib:0;keycode:0;command:0;submenu:@PolyFunctions;extratext:'>'));
+
+   Windowinfo:array[0..2] of tmenuitem_=(
+   ({name:'Tile';attrib:0;keycode:0;command:CMDtilewindows;submenu:nil),
+   (name:'Cascade';attrib:0;keycode:0;command:CMDcascade;submenu:nil),}
+    name:'Grid    ';attrib:MoptToggler;keycode:0;command:CMDtogglegrid;submenu:nil;extratext:'þÿG ';toggleref:@grid_on),
+   (name:'Default pal';attrib:0;keycode:0;command:CMDsetdefaultpal;submenu:nil),
+   (name:'Save pal...';attrib:0;keycode:0;command:CMDsavepaldialog;submenu:nil));
+
+   Renderinfo:array[0..5] of tmenuitem_=(
+   (name:'Dots            ';attrib:0;keycode:0;command:CMDDots;submenu:nil;extratext:'[1]'),
+   (name:'Lines           ';attrib:0;keycode:0;command:CMDlines;submenu:nil;extratext:'[2]'),
+   (name:'Hidden lines    ';attrib:0;keycode:0;command:CMDHlines;submenu:nil;extratext:'[3]'),
+   (name:'Flat shaded     ';attrib:0;keycode:0;command:CMDlsource;submenu:nil;extratext:'[4]'),
+   (name:'Smooth shaded   ';attrib:0;keycode:0;command:CMDgouraud;submenu:nil;extratext:'[5]'),
+   (name:'By Attribute    ';attrib:0;keycode:0;command:CMDCpolygons;submenu:nil;extratext:'[6]'));
+
+   StdWindowinfo:array[0..2]of tmenuitem_=(
+   (name:'Centre [Home]';attrib:0;keycode:0;command:CMDcentrewindow;submenu:nil),
+   (name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
+   (name:'Save Window';attrib:0;keycode:0;command:CMDsavewin;submenu:nil));
+
+   windowinfo3d:array[0..3] of tmenuitem_=(
+   (name:'Centre   [Home]';attrib:0;keycode:0;command:CMDcentrewindow;submenu:nil),
+   (name:'Reset 3d  [TAB]';attrib:0;keycode:0;command:CMDreset3dvalues;submenu:nil),
+   (name:'';attrib:moptseperator;keycode:0;command:0;submenu:nil),
+   (name:'Render depth  >';attrib:0;keycode:0;command:CMDredrawobject3d;submenu:@rendermenu));
+
+   titleinfo:array[0..5] of tmenuitem_=(
+   (name:chr(9);attrib:0;keycode:0;command:0;submenu:@miscmenu),
+   (name:'File';attrib:0;keycode:0;command:0;submenu:@filemenu),
+   (name:'Draw';attrib:0;keycode:0;command:0;submenu:@editmenu),
+   (name:'Select';attrib:0;keycode:0;command:0;submenu:@selectmenu),
+   (name:'Text';attrib:0;keycode:0;command:0;submenu:@textmenu),
+   (name:'Window';attrib:0;keycode:0;command:0;submenu:@windowmenu));
+
+   Extentions:array[0..10]of string[5]=('*.3D','*.RWX','*.POV','*.OBJ','*.GEO','*.WRL','*.PLG','*.ASC','*.GOR','*.COB','*.JAV');
+
+
+   icons:array[0..11,0..31]of byte=(
+   (0,0,8,0,12,0,14,0,15,0,15,128,15,192,15,224,15,240,15,248,15,128,13,192,8,192,0,96,0,96,0,0),
+   (0,0,0,0,63,252,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,32,4,63,252,0,0),
+   (0,128,3,224,15,248,63,254,127,175,127,93,94,177,107,193,85,129,106,129,85,129,42,129,85,134,10,152,5,224,0,128),
+   (0,0,0,0,0,0,0,0,0,0,0,0,3,192,2,64,2,64,3,192,0,0,0,0,0,0,0,0,0,0,0,0),
+   (0,0,0,30,0,18,0,18,0,30,0,32,0,64,0,128,1,0,2,0,4,0,120,0,72,0,72,0,120,0,0,0),
+   (0,128,1,64,1,192,3,32,2,160,7,16,6,144,15,8,14,136,29,4,30,132,61,2,62,130,63,4,30,152,3,224),
+   (0,0,0,0,3,192,12,48,16,8,32,4,32,4,64,2,64,2,64,2,32,4,32,4,16,8,12,48,3,192,0,0),
+   (7,240,24,12,32,2,56,14,63,242,61,2,62,2,61,2,62,2,61,2,62,2,61,2,62,2,61,4,30,24,7,240),
+   (0,0,7,240,31,184,63,196,127,234,127,194,255,169,255,192,191,169,213,0,170,161,64,0,74,2,32,4,24,8,6,160),
+   (0,0,1,0,10,0,21,0,26,64,31,96,31,240,31,248,31,252,31,254,31,252,15,248,7,240,0,96,0,64,0,0),
+   (0,0,0,0,63,254,36,146,36,146,63,254,36,146,36,146,63,254,36,146,36,146,63,254,36,146,36,146,63,254,0,0),
+   (0,0,0,0,127,254,97,134,65,130,1,128,1,128,1,128,1,128,1,128,1,128,1,128,1,128,1,128,7,224,0,0)
+   );
+
+   iconsattr:array[0..11] of byte=(oneon+1,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon,oneon);
+   iconscommands:array[0..11] of word=(
+   CMDeditselect,CMDeditsquare,CMDeditcube,
+   CMDeditDot,CMDeditLiner,CMDeditcone,CMDeditCircle,CMDeditCylinder,
+   CMDeditSphere,CMDeditRotate,CMDeditgrid,CMDedittext);
+
+   Icons2:array[0..5,0..31] of byte=(
+   (0,0,7,128,8,64,22,32,20,32,16,32,16,32,8,96,7,240,0,56,12,28,12,14,63,6,63,0,12,0,12,0),
+   (0,0,7,128,8,64,22,32,20,32,16,32,16,32,8,96,7,240,0,56,0,28,0,14,63,6,63,0,0,0,0,0),
+   (0,0,169,98,173,85,171,85,73,98,0,0,0,0,6,0,12,0,31,210,63,232,31,210,12,0,6,0,0,0,0,0),
+   (0,0,3,192,7,224,14,112,12,48,12,48,12,48,31,248,31,0,30,136,31,0,30,136,31,0,30,136,31,240,0,0),
+   (0,0,3,192,3,192,7,224,0,0,0,0,3,192,2,64,2,64,3,192,0,0,0,0,0,0,3,192,7,224,0,0),
+   (0,0,96,6,112,14,56,30,28,60,6,112,3,192,1,128,3,192,6,96,12,48,28,24,56,12,112,14,48,6,0,0));
+   icons2attr:array[0..5] of byte=(nostick,nostick,nostick,onoff,1+onoff,nostick);
+   icons2commands:array[0..5] of word=(CMDzoomin,CMDzoomout,CMDundo,CMDtogglegridFROMICON,CMDtoggleNodesFROMICON,CMDnewbox);
 
 
 
-altletters:array[0..31]of byte=(0,127,128,146,170,170,170,186,170,171,128,127,0,0,0,0,0,
-                                252,2,58,18,18,18,18,18,210,2,252,0,0,0,0);
-ctrlletters:array[0..31]of byte=(0,127,128,159,162,162,162,162,162,154,128,127,0,0,0,0,0,
-                                254,1,201,169,169,201,169,169,173,1,254,0,0,0,0);
+   altletters:array[0..31]of byte=(0,127,128,146,170,170,170,186,170,171,128,127,0,0,0,0,0,
+                                   252,2,58,18,18,18,18,18,210,2,252,0,0,0,0);
+   ctrlletters:array[0..31]of byte=(0,127,128,159,162,162,162,162,162,154,128,127,0,0,0,0,0,
+                                   254,1,201,169,169,201,169,169,173,1,254,0,0,0,0);
 
-fin:boolean=false;
-{Loadobject_dialog:file_dialog=nil;
-Saveobject_dialog:file_dialog=nil;
-appendobject_dialog:file_dialog=nil;
-loadfont_dialog:file_dialog=nil;}
-loadobjectPID=1;
-saveobjectPID=2;
-appendobjectPID=3;
-loadfontPID=4;
-quitPID=5;
-destroyPID=6;
-infoPID=7;
-helpPID=8;
-dselectPID=9;
-selectsomePID=10;
-overwritePID=11;
-notyetimpPID=12;
-filenotfoundPID=14;
-copyrightPID=16;
-PerspectivePID=1534;
-SurfacePID=1535;
-PIDambient=1536;
-PIDdiffuse=1537;
-PIDspecular=1538;
-PIDtransparency=1539;
-PIDcolourbar=1640;
+   fin:boolean=false;
+   {Loadobject_dialog:file_dialog=nil;
+   Saveobject_dialog:file_dialog=nil;
+   appendobject_dialog:file_dialog=nil;
+   loadfont_dialog:file_dialog=nil;}
+   loadobjectPID=1;
+   saveobjectPID=2;
+   appendobjectPID=3;
+   loadfontPID=4;
+   quitPID=5;
+   destroyPID=6;
+   infoPID=7;
+   helpPID=8;
+   dselectPID=9;
+   selectsomePID=10;
+   overwritePID=11;
+   notyetimpPID=12;
+   filenotfoundPID=14;
+   copyrightPID=16;
+   PerspectivePID=1534;
+   SurfacePID=1535;
+   PIDambient=1536;
+   PIDdiffuse=1537;
+   PIDspecular=1538;
+   PIDtransparency=1539;
+   PIDcolourbar=1640;
 
-filemode:word=CMD3dfile;
+   filemode:word=CMD3dfile;
 
 {****----Global Variables----****}
 var
-
-lgroupoffset:integer; {for the start of the right angle in l groups}
-GraphInstalled:boolean;
-dorth:delta_orth;
-PerspectiveINT:longint;
-font_path,clay_dir:string[80];
-textfile,helpfile,registerfile,objectinfo:pchar;
-varFontpath,varobjectpath,exepath:string;
-lop:word;
-draw_object:edit_objtype;
-application:Clay;
-backview:tview;
-status:statusviewb;
+   lgroupoffset:integer; {for the start of the right angle in l groups}
+   GraphInstalled:boolean;
+   dorth:delta_orth;
+   PerspectiveINT:longint;
+   font_path,clay_dir:string[80];
+   textfile,helpfile,registerfile,objectinfo:pchar;
+   varFontpath,varobjectpath,exepath:string;
+   lop:word;
+   draw_object:edit_objtype;
+   application:Clay;
+   backview:tview;
+   status:statusviewb;
 
 implementation
 
@@ -892,9 +891,6 @@ begin
 
 end;}
 
-
-
-
 constructor RotationControl_.create(xa,ya:integer);
 const bsize=3;
       ynumsel=28;
@@ -1272,164 +1268,5 @@ begin
   retstr:=copy(pstr,0,lastindx);
   strippath:=retstr;
 end;
- (*
-begin
-
-  {mem1:=memavail;
-  writeln(memavail);
-  writeln(memavail+fixedusage);
-  }
-
-  PerspectiveINT:=PersStart;
-  if memavail<longint(minmem) then begin
-    writecon('Not Enough Memory, you need '+' bytes.$'+chr(13));{+itoa(minmem+fixedusage)+}
-    writecon(' bytes are available.$'+chr(13));{itoa(fixedusage+memavail)}
-    exit;
-  end;
-
-  {if resetmouse=false then begin
-    writeln('You need a mouse and/or a mouse driver.');
-    exit;
-  end;}
-
-  clay_dir := 'C:\clayworks';
-  font_path := 'c:\clayworks\fonts';
-
-  //clay_dir:=getenv('CLAY_dir');
-  //font_path:=getenv('TWIN_fontdir');
-
-  if (clay_dir='')or(font_path='') then begin
-    writecon('Please set the "CLAY_dir" & "TWIN_fontdir" env. variables, press a key.$'+chr(13));
-    readkey;
-
-  end;
-
-  {fillchar(blackpal,sizeof(blackpal),0);
-  correct_ordering;
-  getpal(currpal);
-  fadepal(currpal,blackpal,16,false);}
-
-  exepath:=strippath(paramstr(0));
-
-  {Setup Paths}
-  if clay_dir<>'' then
-    clay_dir:=clay_dir+'\'
-  else
-    clay_dir:=exepath;
-  varfontpath:=gtdir;
-  varobjectpath:=gtdir;
-  if (font_path='') then begin
-    font_path:=exepath+'sansf16b.fnt';
-  end;
-
-  {Initialize Graphics Mode}
-  if copy(paramstr(1),1,1)='v' then begin
-    case atoi(copy(paramstr(1),2,system.length(paramstr(1))-1)) of
-      1:GraphInstalled:=initgraph(VGA640x480x16);
-      2:GraphInstalled:=initgraph(SVGA800x600x16);
-      3:GraphInstalled:=initgraph(SVGA640x480x256);
-      4:GraphInstalled:=initgraph(SVGA800x600x256);
-      5:GraphInstalled:=initgraph(SVGA1024x768x256);
-      6:GraphInstalled:=initgraph(xVGA400x300x256);
-    end;
-    if not GraphInstalled then begin
-      Writecon('I can not use that graphics mode$'+chr(13));
-      exit;
-    end;
-  end else
-    GraphInstalled:=initgraph(VGA640x480x16);
-
-  {Setup Palette}
-  usecolours(0,16);
-
-  {Load Font List}
-  if fexist(font_path) then
-    loadfontlist(font_path, tcharset)
-  else begin
-    writeln('Font file not found, please place the file sans16b.fnt in the program file''s directory');
-    exit;
-  end;
-
-  {Setup Character Set}
-  //move(altletters,mem[seg(tcharset):ofs(tcharset)+(254 shl 4)],32);
-  //move(ctrlletters,mem[seg(tcharset):ofs(tcharset)+(252 shl 4)],32);
-  tcharset.widths[252]:=8;
-  tcharset.widths[253]:=9;
-  tcharset.widths[254]:=8;
-  tcharset.widths[255]:=9;
-  tcharset.attrib:=1;
-
-  {Load Font}
-  if fexist(clay_dir+defaultfont) then begin
-    Vfontin:=vfont.load(defaultfont);
-  end else
-    Vfontin:=false;
-
-  {Load Info}
-  if fexist(clay_dir+'info.txt') then
-    textfile:=loadtext(clay_dir+'info.txt');
-  getmem(objectinfo,512);
-  gridpic:=nil;
-
-  {Setup Draw Object}
-  new(draw_object,create(4900,4200,4200));
-
-
-  {Initialize Graphics Mode}
-  setpal(@pal16,0,16);
-
-  {Initialize 3D renderer}
-  init3d;
-
-  {Setup Light}
-  lightvec.setlight(0,0,0,500,50,10,SC.ColourDepth shr 1);
-
-
-
-   {Create Clayworks Application}
-  with SC.screenport do
-   application := new(clay,create(0,0,x2,y2));
-
-  InitTWIN(application);
-
-  {Load warning PCX}
-  if fexist(clay_dir+'warn.pcx') then
-    warningsign:=readpcx(clay_dir+'warn.pcx',PAcolcheck)
-  else
-    warningsign:=nil;
-
-  application^.draw;
-
-  mouseon;
-  root:=application;
-
-  {Show register file}
-  registerfile:=loadtext(clay_dir+'register.txt');
-  desktop^.add_and_draw(new(infodialog,create(90,80,590,470,registerfile,true)),VPcentre,PIDundefined);
-
-  {Run Loop}
-
-  while not fin do begin
-    eventmpos;
-    eventkey;
-    status^.update;
-  end;
-
-  {Destroy ClayWorks}
-
-  mouseoff;
-  if vfontin then
-    vfont.done;
-
-  draw_object^.done;
-  close3d;
-  application^.done;
-  freemem(textfile,strlen(textfile));
-  {freemem(objectinfo,512);}
-  if warningsign<>nil then
-    destroybitmap(warningsign);
-  closegraph;
-  writecon('That was ClayWorks V'+VersionStr+', (C) T.lewis 1995.$'+chr(13));
-  *)
 
 end.

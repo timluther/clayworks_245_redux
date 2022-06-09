@@ -74,7 +74,8 @@ IMPLEMENTATION
 var
    counter,Dcounter,Lcounter:word;
 
-{Procedure gettime(var hours,minutes,seconds,centi:byte);assembler;
+{$IFDEF MSDOS}
+Procedure gettime(var hours,minutes,seconds,centi:byte);assembler;
 asm
   pushf
   MOV   AH, 2CH
@@ -85,37 +86,42 @@ asm
   MOV   ES:[di+2],dh
   MOV   ES:[di+3],dl
   popf
-end;}
+end;
+{$ENDIF}
 
 Procedure Mouse(var m1,m2,m3,m4:integer);assembler;
 asm
-  {push es
-  les di,m1
-  mov ax,es:[di]
-  les di,m2
-  mov bx,es:[di]
-  les di,m3
-  mov cx,es:[di]
-  les di,m4
-  mov dx,es:[di]
-  pop es
-  int $33
-  les di,m1
-  mov es:[di],ax
-  les di,m2
-  mov es:[di],bx
-  les di,m3
-  mov es:[di],cx
-  les di,m4
-  mov es:[di],dx}
+   {$IFDEF MSDOS}
+   push es
+   les di,m1
+   mov ax,es:[di]
+   les di,m2
+   mov bx,es:[di]
+   les di,m3
+   mov cx,es:[di]
+   les di,m4
+   mov dx,es:[di]
+   pop es
+   int $33
+   les di,m1
+   mov es:[di],ax
+   les di,m2
+   mov es:[di],bx
+   les di,m3
+   mov es:[di],cx
+   les di,m4
+   mov es:[di],dx
+   {$ENDIF}
 end;
 
 Procedure setuserproc(p:pointer;callmask:word);assembler;
 asm
-  {mov ax,000Ch
-  mov cx,callmask
-  les dx,p
-  int $33}
+   {$IFDEF MSDOS}
+   mov ax,000Ch
+   mov cx,callmask
+   les dx,p
+   int $33
+   {$ENDIF}
 end;
 
 Procedure Setmousepos(x,y:integer);
@@ -175,27 +181,34 @@ end;
 
 Procedure Mouseon;assembler;
 asm
-  //mov ax,1
-  //int $33
+{$IFDEF MSDOS}
+   mov ax,1
+   znt $33
+{$ENDIF}
 End;
 
 Procedure Mouseoff;assembler;
 asm
-  //mov ax,2
-  //int $33
+{$IFDEF MSDOS}
+   mov ax,2
+   int $33
+{$ENDIF}
 End;
 
 Procedure setmouseshape(x,y:integer;var mask);
-Var M1,M2,M3,M4:integer;
+Var
+   M1,M2,M3,M4:integer;
 Begin
-  {M1:=9;m2:=x;m3:=y;
+  {$IFDEF MSDOS}
+  M1:=9;m2:=x;m3:=y;
   m4:=ofs(mask);
   asm
     les di,mask
   end;
   Mouse(m1,m2,m3,m4);
   setmousepos(xm+1,ym);
-  setmousepos(xm,ym);}
+  setmousepos(xm,ym);
+  {$ENDIF}
 End;
 
 procedure mouseoffrect(var rect:trect);assembler;
@@ -203,7 +216,6 @@ procedure mouseoffrect(var rect:trect);assembler;
     if rect.overlap(mouserect) then
       mouseoff;
   end;}
-
 asm
 {
     mov ax,$10
@@ -254,71 +266,77 @@ End;
 
 Procedure setmickeys(x,y:integer);assembler;
 asm
-  {mov ax,0fh
-  mov cx,x
-  mov dx,y
-  int 33h}
+   {$IFDEF MSDOS}
+   mov ax,0fh
+   mov cx,x
+   mov dx,y
+   int 33h
+   {$ENDIF}
 end;
 
 Procedure setsence(x,y,dspeed:integer);assembler;
 asm
-  {mov ax,1Ah
-  mov bx,x
-  mov cx,y
-  mov dx,dspeed
-  int 33h}
+   {$IFDEF MSDOS}
+   mov ax,1Ah
+   mov bx,x
+   mov cx,y
+   mov dx,dspeed
+   int 33h
+   {$ENDIF}
 end;
 
 
 
 Procedure mbutton;
+{$IFNDEF MSDOS}
 var
    Axm,Aym,
    Agridxm,Agridym,
    Aoldgridxm,Aoldgridym,
    Aoldxm,Aoldym : integer;
+{$ENDIF}
 begin
-  Axm := xm;
-  Aym := ym;
-  Agridxm := gridxm;
-  Agridym := gridym;
-  Aoldgridxm := oldgridxm;
-  Aoldxm := oldxm;
-  Aoldym := oldym;
+   {$IFNDEF MSDOS}
+   Axm := xm;
+   Aym := ym;
+   Agridxm := gridxm;
+   Agridym := gridym;
+   Aoldgridxm := oldgridxm;
+   Aoldxm := oldxm;
+   Aoldym := oldym;
 
-  mpos;
+   mpos;
 
-  xm := Axm;
-  ym := Aym;
-  gridxm := Agridxm;
-  gridym := Agridym;
-  oldgridxm := Aoldgridxm;
-  oldxm := Aoldxm;
-  oldym := Aoldym;
-
-  {
-  asm
-    push gridxm
-    push gridym
-    push oldgridxm
-    push oldgridym
-    push xm
-    push ym
-    push oldxm
-    push oldym
-  end;
-  mpos;
-  asm
-    pop oldym
-    pop oldxm
-    pop ym
-    pop xm
-    pop oldgridym
-    pop oldgridxm
-    pop gridym
-    pop gridxm
-  end;
-  }
+   xm := Axm;
+   ym := Aym;
+   gridxm := Agridxm;
+   gridym := Agridym;
+   oldgridxm := Aoldgridxm;
+   oldxm := Aoldxm;
+   oldym := Aoldym;
+   {$ELSE}
+   asm
+      push gridxm
+      push gridym
+      push oldgridxm
+      push oldgridym
+      push xm
+      push ym
+      push oldxm
+      push oldym
+   end;
+   mpos;
+   asm
+      pop oldym
+      pop oldxm
+      pop ym
+      pop xm
+      pop oldgridym
+      pop oldgridxm
+      pop gridym
+      pop gridxm
+   end;
+   {$ENDIF}
 end;
 
 Procedure mpos;
@@ -448,19 +466,22 @@ end;
 
 Procedure getstuff;
 Begin
+  {$IFDEF MSDOS}
   asm
-  {  mov byte ptr ms_attrib,al
+    mov byte ptr ms_attrib,al
     mov word ptr xm,cx
     mov word ptr ym,dx
     mov word ptr zm,bx
-  }
   end;
-  //ms_moved:=ms_attrib and 1<>0;
+  ms_moved:=ms_attrib and 1<>0;
+  {$ENDIF}
 end;
 
 Begin
   counter:=clickwait;
   Dcounter:=Dclickwait;
   Lcounter:=linger_for;
-  {setuserproc(@getstuff,255);}
+  {$IFDEF MSDOS}
+  setuserproc(@getstuff,255);
+  {$ENDIF}
 end.

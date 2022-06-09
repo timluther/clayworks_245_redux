@@ -37,6 +37,7 @@ type
       constructor Create(ACaption : String; AWidth, AHeight : SInt32); override;
       destructor Destroy(); override;
       procedure PumpOSMessages(); override;
+
       procedure SetCaption(ACaption : string); override;
    end;
 

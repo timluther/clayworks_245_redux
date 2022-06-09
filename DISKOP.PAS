@@ -4,7 +4,7 @@ Unit diskop;
 INTERFACE
 
 uses
-  {$IFDEF DPMI} dos, {$ENDIF}
+  {$IFDEF MSDOS} dos, {$ENDIF}
   SysUtils,
   {Clayworks}
   ClayTypes, tmaths;
@@ -45,14 +45,56 @@ Function instring(name:string;testchar:char):boolean;
 {Function readkey:char;
 Function keypressed:boolean;}
 
-{$IFNDEF HAS_FSPLIT}
-{$push}
-{$warnings off}
-Procedure FSplit (Path: String; var Dir: String; var Name: String; var Ext: String);
-{$pop}
+{$IFNDEF MSDOS}
+Procedure FSplit(Path: String; var Dir: String; var Name: String; var Ext: String);
 {$ENDIF}
 
 IMPLEMENTATION
+
+{$IFNDEF MSDOS}
+Procedure FSplit(Path: String; var Dir: String; var Name: String; var Ext: String);
+var
+  DirEnd, ExtStart: Longint;
+begin
+  { allow slash and backslash }
+  DoDirSeparators(Path);
+{ Find the first DirectorySeparator or DriveSeparator from the end. }
+  DirEnd := Length (Path);
+{ Avoid problems with platforms having DriveSeparator = DirectorySeparator. }
+  if DirectorySeparator = DriveSeparator then
+   while (DirEnd > 0) and (Path [DirEnd] <> DirectorySeparator) do
+    Dec (DirEnd)
+  else
+   while (DirEnd > 0) and
+         (Path [DirEnd] <> DirectorySeparator) and
+         (Path [DirEnd] <> DriveSeparator) do
+    Dec (DirEnd);
+
+{ The first "extension" should be returned if LFN }
+{ support not available, the last one otherwise.  }
+  if LFNSupport then
+    begin
+      ExtStart := Length (Path);
+      while (ExtStart > DirEnd) and (Path [ExtStart] <> ExtensionSeparator) do
+        Dec (ExtStart);
+      if ExtStart = 0 then
+        ExtStart := Length (Path) + 1
+      else
+        if Path [ExtStart] <> ExtensionSeparator then
+          ExtStart := Length (Path) + 1;
+    end
+  else
+    begin
+      ExtStart := DirEnd + 1;
+      while (ExtStart <= Length (Path)) and (Path [ExtStart] <> ExtensionSeparator) do
+        Inc (ExtStart);
+    end;
+
+  Dir := Copy (Path, 1, DirEnd);
+  Name := Copy (Path, DirEnd + 1, ExtStart - DirEnd - 1);
+  Ext := Copy (Path, ExtStart, Length (Path) - ExtStart + 1);
+end;
+{$ENDIF}
 
 Function CurrentDrive:byte;
 begin
@@ -241,56 +283,6 @@ Begin
     dec(lop);
   truncatepath:=copy(path,1,lop);
 End;
-
-
-
-{$IFNDEF HAS_FSPLIT}
-{$push}
-{$warnings off}
-Procedure FSplit (Path: String; var Dir: String; var Name: String; var Ext: String);
-var
-  DirEnd, ExtStart: Longint;
-begin
-  { allow slash and backslash }
-  DoDirSeparators(Path);
-{ Find the first DirectorySeparator or DriveSeparator from the end. }
-  DirEnd := Length (Path);
-{ Avoid problems with platforms having DriveSeparator = DirectorySeparator. }
-  if DirectorySeparator = DriveSeparator then
-   while (DirEnd > 0) and (Path [DirEnd] <> DirectorySeparator) do
-    Dec (DirEnd)
-  else
-   while (DirEnd > 0) and
-         (Path [DirEnd] <> DirectorySeparator) and
-         (Path [DirEnd] <> DriveSeparator) do
-    Dec (DirEnd);
-
-{ The first "extension" should be returned if LFN }
-{ support not available, the last one otherwise.  }
-  if LFNSupport then
-    begin
-      ExtStart := Length (Path);
-      while (ExtStart > DirEnd) and (Path [ExtStart] <> ExtensionSeparator) do
-        Dec (ExtStart);
-      if ExtStart = 0 then
-        ExtStart := Length (Path) + 1
-      else
-        if Path [ExtStart] <> ExtensionSeparator then
-          ExtStart := Length (Path) + 1;
-    end
-  else
-    begin
-      ExtStart := DirEnd + 1;
-      while (ExtStart <= Length (Path)) and (Path [ExtStart] <> ExtensionSeparator) do
-        Inc (ExtStart);
-    end;
-
-  Dir := Copy (Path, 1, DirEnd);
-  Name := Copy (Path, DirEnd + 1, ExtStart - DirEnd - 1);
-  Ext := Copy (Path, ExtStart, Length (Path) - ExtStart + 1);
-end;
-{$pop}
-{$ENDIF HAS_FSPLIT}
 
 Function fragname(path : string; frag:fragtype):string;
 Var

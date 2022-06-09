@@ -13,16 +13,15 @@ uses
    {$IFDEF Windows} ClayWindowWin32, ClayRenderGDI, {$ENDIF}
 
    {Original Units}
-   tmaths,diskop,
-   msmouse,chardef,strings,
-   gbasics,ggraph,colour,stdpal,
-   Basic3d,tdb,tdeditb,
-   views,
-   twinb,twindraw,
-   gadgets,cdialog,tdwin,tmenust,pcx256,
+   tmaths, diskop, Sincos, colour, stdpal, pcx256,
+   msmouse, chardef, strings, vectfont,
+   gbasics, ggraph, Basic3d,
+   tdb, tdeditb,
+   views, twinb, tdwin, twindraw,
+   gadgets, cdialog, tmenust,
 
    {Note : temporary, old main program unit but lots of stuff in it}
-   claycp, Sincos, vectfont;
+   claycp;
 
 type
    { TClayworks }
@@ -189,14 +188,16 @@ begin
    {Clayworks Flag}
    fin := True;
 
-   {Destroy ClayWorks}
 
    mouseoff;
    if vfontin then
    vfont.done;
 
+   {Destroy Draw}
    dispose(draw_object, done);
    close3d;
+
+   {Destroy ClayWorks Application}
    dispose(application, done);
 
    freemem(textfile,strlen(textfile));
