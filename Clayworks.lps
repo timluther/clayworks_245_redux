@@ -32,7 +32,6 @@
       <Unit>
         <Filename Value="ClayTypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="4"/>
         <TopLine Value="25"/>
         <CursorPos X="40" Y="43"/>
@@ -264,10 +263,11 @@
       </Unit>
       <Unit>
         <Filename Value="ClayRenderGDI.pas"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="402"/>
-        <CursorPos X="34" Y="261"/>
+        <TopLine Value="401"/>
+        <CursorPos X="43" Y="443"/>
         <UsageCount Value="12"/>
         <Loaded Value="True"/>
       </Unit>
@@ -337,6 +337,9 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
+    <General>
+      <ActiveWindowIndexAtStart Value="1"/>
+    </General>
     <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="Clayworks.pas"/>
