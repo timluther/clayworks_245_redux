@@ -22,7 +22,7 @@ uses
    gadgets,cdialog,tdwin,tmenust,pcx256,
 
    {Note : temporary, old main program unit but lots of stuff in it}
-   claycp;
+   claycp, Sincos, vectfont;
 
 type
    { TClayworks }

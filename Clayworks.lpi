@@ -82,6 +82,126 @@
         <Filename Value="ClayGlobal.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="TMATHS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tmaths"/>
+      </Unit>
+      <Unit>
+        <Filename Value="SINCOS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Sincos"/>
+      </Unit>
+      <Unit>
+        <Filename Value="MSMOUSE.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="msmouse"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GBASICS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Gbasics"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GGRAPH.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Ggraph"/>
+      </Unit>
+      <Unit>
+        <Filename Value="COLOUR.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="colour"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDEDITB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tdeditb"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TWINB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="twinb"/>
+      </Unit>
+      <Unit>
+        <Filename Value="VIEWS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Views"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TMENUST.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tmenust"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CDIALOG.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDWIN.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tdwin"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CLAYCP.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="ClayRenderGDI.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="DISKOP.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="diskop"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TWINDRAW.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Twindraw"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CHARDEF.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chardef"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tdb"/>
+      </Unit>
+      <Unit>
+        <Filename Value="VECTFONT.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="vectfont"/>
+      </Unit>
+      <Unit>
+        <Filename Value="PCX256.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="BASIC3D.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="BITMAP25.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GADGETS.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LCD.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="PITTIMER.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="STDPAL.PAS"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

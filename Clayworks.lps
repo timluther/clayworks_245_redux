@@ -8,8 +8,9 @@
       <Unit>
         <Filename Value="Clayworks.pas"/>
         <IsPartOfProject Value="True"/>
-        <TopLine Value="220"/>
-        <CursorPos X="5" Y="275"/>
+        <IsVisibleTab Value="True"/>
+        <TopLine Value="216"/>
+        <CursorPos X="17" Y="228"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
       </Unit>
@@ -33,18 +34,16 @@
       <Unit>
         <Filename Value="ClayTypes.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="4"/>
-        <TopLine Value="261"/>
-        <CursorPos X="68" Y="281"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="253"/>
+        <CursorPos X="54" Y="276"/>
         <UsageCount Value="34"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="ClayWindow.pas"/>
         <IsPartOfProject Value="True"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="59"/>
+        <TopLine Value="55"/>
         <CursorPos X="5" Y="114"/>
         <UsageCount Value="34"/>
         <Loaded Value="True"/>
@@ -59,10 +58,230 @@
       <Unit>
         <Filename Value="ClayGlobal.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="-1"/>
         <CursorPos X="19" Y="18"/>
         <UsageCount Value="32"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TMATHS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tmaths"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="121"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="SINCOS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Sincos"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos X="9" Y="7"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="MSMOUSE.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="msmouse"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="267"/>
+        <CursorPos X="55" Y="332"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GBASICS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Gbasics"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="2"/>
+        <CursorPos X="13" Y="9"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GGRAPH.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Ggraph"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="19" Y="24"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="COLOUR.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="colour"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="24" Y="4"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDEDITB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tdeditb"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="768"/>
+        <CursorPos X="19" Y="796"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TWINB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="twinb"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="14" Y="17"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="VIEWS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Views"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="992"/>
+        <CursorPos X="29" Y="1030"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TMENUST.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tmenust"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="59" Y="16"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CDIALOG.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="15" Y="6"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDWIN.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Tdwin"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="15" Y="9"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CLAYCP.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="1"/>
+        <CursorPos Y="16"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="ClayRenderGDI.pas"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="2"/>
+        <WindowIndex Value="1"/>
+        <TopLine Value="402"/>
+        <CursorPos X="14" Y="411"/>
+        <UsageCount Value="20"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="DISKOP.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="diskop"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="14" Y="10"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TWINDRAW.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="Twindraw"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="28" Y="5"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="CHARDEF.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="chardef"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="2"/>
+        <CursorPos X="13" Y="8"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="TDB.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="tdb"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="11" Y="9"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="VECTFONT.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="vectfont"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="4" Y="4"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="PCX256.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="21" Y="30"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="BASIC3D.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="BITMAP25.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="GADGETS.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="LCD.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="PITTIMER.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
+      </Unit>
+      <Unit>
+        <Filename Value="STDPAL.PAS"/>
+        <IsPartOfProject Value="True"/>
+        <EditorIndex Value="-1"/>
+        <WindowIndex Value="-1"/>
+        <TopLine Value="-1"/>
+        <CursorPos X="-1" Y="-1"/>
+        <UsageCount Value="20"/>
       </Unit>
       <Unit>
         <Filename Value="..\J\Jink\JFrameWork\JWindow\JWindowWin32.pas"/>
@@ -142,97 +361,6 @@
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="TMATHS.PAS"/>
-        <UnitName Value="Tmaths"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="121"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="SINCOS.PAS"/>
-        <UnitName Value="Sincos"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <CursorPos X="9" Y="7"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="MSMOUSE.PAS"/>
-        <UnitName Value="msmouse"/>
-        <EditorIndex Value="2"/>
-        <TopLine Value="267"/>
-        <CursorPos X="55" Y="332"/>
-        <UsageCount Value="10"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="GBASICS.PAS"/>
-        <UnitName Value="Gbasics"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="2"/>
-        <CursorPos X="13" Y="9"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="GGRAPH.PAS"/>
-        <UnitName Value="Ggraph"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="19" Y="24"/>
-        <UsageCount Value="12"/>
-      </Unit>
-      <Unit>
-        <Filename Value="COLOUR.PAS"/>
-        <UnitName Value="colour"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="24" Y="4"/>
-        <UsageCount Value="11"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TDEDITB.PAS"/>
-        <UnitName Value="Tdeditb"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="768"/>
-        <CursorPos X="19" Y="796"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TWINB.PAS"/>
-        <UnitName Value="twinb"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="14" Y="17"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="VIEWS.PAS"/>
-        <UnitName Value="Views"/>
-        <EditorIndex Value="1"/>
-        <TopLine Value="992"/>
-        <CursorPos X="29" Y="1030"/>
-        <UsageCount Value="12"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TMENUST.PAS"/>
-        <UnitName Value="Tmenust"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="59" Y="16"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="CDIALOG.PAS"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="15" Y="6"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TDWIN.PAS"/>
-        <UnitName Value="Tdwin"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="15" Y="9"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
         <Filename Value="..\Clayworks_Lazarus\ClayWorksMain.pas"/>
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
@@ -248,13 +376,6 @@
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="CLAYCP.PAS"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <CursorPos Y="16"/>
-        <UsageCount Value="12"/>
-      </Unit>
-      <Unit>
         <Filename Value="..\Clayworks_Lazarus\GGRAPH.PAS"/>
         <UnitName Value="Ggraph"/>
         <EditorIndex Value="-1"/>
@@ -264,70 +385,18 @@
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="ClayRenderGDI.pas"/>
-        <EditorIndex Value="3"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="401"/>
-        <CursorPos X="43" Y="443"/>
-        <UsageCount Value="12"/>
-        <Loaded Value="True"/>
-      </Unit>
-      <Unit>
-        <Filename Value="DISKOP.PAS"/>
-        <UnitName Value="diskop"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="14" Y="10"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TWINDRAW.PAS"/>
-        <UnitName Value="Twindraw"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="28" Y="5"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="CHARDEF.PAS"/>
-        <UnitName Value="chardef"/>
-        <EditorIndex Value="-1"/>
-        <WindowIndex Value="2"/>
-        <CursorPos X="13" Y="8"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="TDB.PAS"/>
-        <UnitName Value="tdb"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="11" Y="9"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
         <Filename Value="C:\FPC\fpcsrc\rtl\objpas\math.pp"/>
         <UnitName Value="Math"/>
         <EditorIndex Value="-1"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
-        <Filename Value="VECTFONT.PAS"/>
-        <UnitName Value="vectfont"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="4" Y="4"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
-        <Filename Value="PCX256.PAS"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="21" Y="30"/>
-        <UsageCount Value="10"/>
-      </Unit>
-      <Unit>
         <Filename Value="C:\FPC\fpcsrc\rtl\inc\systemh.inc"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <TopLine Value="879"/>
         <CursorPos X="12" Y="907"/>
         <UsageCount Value="11"/>
-        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="C:\FPC\fpcsrc\rtl\x86_64\x86_64.inc"/>
@@ -338,7 +407,7 @@
         <UsageCount Value="10"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="29">
+    <JumpHistory HistoryIndex="25">
       <Position>
         <Filename Value="ClayWindowWin32.pas"/>
         <Caret Line="278" Column="53" TopLine="255"/>
@@ -358,9 +427,6 @@
       <Position>
         <Filename Value="Clayworks.pas"/>
         <Caret Line="231"/>
-      </Position>
-      <Position>
-        <Filename Value="MSMOUSE.PAS"/>
       </Position>
       <Position>
         <Filename Value="Clayworks.pas"/>
@@ -387,24 +453,12 @@
         <Caret Line="236" Column="13" TopLine="203"/>
       </Position>
       <Position>
-        <Filename Value="VIEWS.PAS"/>
-        <Caret Line="232" Column="11" TopLine="204"/>
-      </Position>
-      <Position>
-        <Filename Value="VIEWS.PAS"/>
-        <Caret Line="1030" Column="29" TopLine="992"/>
-      </Position>
-      <Position>
         <Filename Value="ClayWindowWin32.pas"/>
         <Caret Line="62" Column="20" TopLine="40"/>
       </Position>
       <Position>
         <Filename Value="Clayworks.pas"/>
         <Caret Line="215" Column="33"/>
-      </Position>
-      <Position>
-        <Filename Value="ClayTypes.pas"/>
-        <Caret Line="29" Column="38" TopLine="25"/>
       </Position>
       <Position>
         <Filename Value="Clayworks.pas"/>
