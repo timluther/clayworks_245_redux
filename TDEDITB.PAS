@@ -1734,7 +1734,7 @@ begin
 end;
  }
 procedure edit_objtype_.read3d(filename:string;append:boolean);
-Var maxs:array[0..2] of word;
+Var maxs: packed array[0..2] of word;
   tmppoly:PolygonStruct;
   tmpjoin:joinstruct;
   tmpvector:VectorStruct;
@@ -1748,7 +1748,7 @@ Begin
   assign(f,filename);
   Reset(f,recsize);
 
-  blockread(f,maxs,sizeof(maxs),recsize);
+  blockread(f,maxs,sizeof(word)*3,recsize);
   if append then begin
     addpnts:=maxpoints;
   end else begin
@@ -1795,17 +1795,19 @@ Begin
 end;
 
 procedure edit_objtype_.write3d(filename:string);
-Var maxs:array[0..2] of word;recsize:word;
-    tmppoly:polygonstruct;
-    lop:word;
-    tmpvec:VectorStruct;
+Var
+    maxs: packed array[0..2] of word;
+    recsize:word;
+    tmppoly :polygonstruct;
+    lop :word;
+    tmpvec : VectorStruct;
     f:file;
 Begin
   recsize:=1;
   assign(f,filename);
   Rewrite(f,1);
   maxs[0]:=maxpoints;maxs[1]:=maxjoins;maxs[2]:=maxpolys;
-  blockwrite(f,maxs,sizeof(maxs));
+  blockwrite(f,maxs,sizeof(word)*3);
   if maxpoints>0 then begin
     CurrNode:=pointer(thred);
     for lop:=0 to maxpoints-1 do with tmpvec do begin
@@ -1816,14 +1818,14 @@ Begin
     end;
     if maxjoins>0 then
       for lop:=0 to maxjoins-1 do
-        blockwrite(f,jointo^[lop],4);
+        blockwrite(f,jointo^[lop],SizeOf(Integer)*2);
     if maxpolys>0 then begin
       Currpoly:=pointer(polys);
       for lop:=0 to maxpolys-1 do with tmppoly do begin
         numsides:=currpoly^.numsides;
         attrib:=currpoly^.pattrib;
         colour:=currpoly^.textureref;
-        move(currpoly^.p,p,8);
+        move(currpoly^.p,p,SizeOf(Word)*4);
         blockwrite(f,TmpPoly,sizeof(polygonstruct),recsize);
         inc(currpoly);
       end;

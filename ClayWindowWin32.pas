@@ -246,6 +246,8 @@ begin
 end;
 
 function TClayWindowWin32.ProcessOSMessage(Win32Msg : UINT; Win32wParam : wPARAM; Win32lParam : LPARAM) : LRESULT;
+var
+   I : UInt32;
 begin
    Result := -1;
 
@@ -315,7 +317,26 @@ begin
       begin
 
       end;
+      WM_KEYDOWN,WM_SYSKEYDOWN :
+      begin
 
+      end;
+      WM_KEYUP,WM_SYSKEYUP :
+      begin
+         if OnKeyUp<>nil then
+            OnKeyUp(Self,Win32wParam);
+         Result := 0;
+      end;
+      WM_CHAR :
+      begin
+          {if this is not a key repeat}
+         if ((Win32lParam and $40000000)=0) then
+         begin
+            if OnKeyDown<>nil then
+               OnKeyDown(Self,Win32wParam);
+         end;
+         Result := 0;
+      end;
    end;
 
    if (Result = -1) then {Message not handled. Pass to Windows}

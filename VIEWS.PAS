@@ -1020,6 +1020,7 @@ begin
   {$IFDEF MSDOS}
   if keypressed then
   {$ENDIF}
+  if HostKey<>0 then
   begin
     {$IFDEF MSDOS}
     readkey;
@@ -1039,6 +1040,10 @@ begin
       end;
     end;
   end;
+  HostScan := 0;
+  HostKey := 0;
+  scancode := 0;
+  charcode := #0;
 end;
 
 {procedure addcallback(view_:updateview;wait_:longint);

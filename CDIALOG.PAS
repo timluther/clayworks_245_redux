@@ -430,7 +430,8 @@ procedure loadlists;
 var ODir: String;
 begin
 
-  if texteditbox^.txt<>sdir+sname+sext then begin
+  if texteditbox^.txt<>sdir+sname+sext then
+  begin
     Odir:=Sdir;
     fsplit(texteditbox^.txt,sdir,sname,sext);
     if (sname='')and(sext='') then begin
@@ -1116,7 +1117,6 @@ begin
   LastChar^:=chr(0);
   close(f);
   loadtext:=textfile;
-  
 end;
 
 Constructor MoveTitle_.Create(xa,ya,xb,yb:integer;Name:string);

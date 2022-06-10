@@ -1,19 +1,21 @@
 Unit Tmaths;
 
 INTERFACE
-uses sincos,strings;
+uses
+   ClayTypes,
+   sincos,strings;
 const
 MTpreconcat=1;
 MTpostconcat=2;
 MTreplace=3;
 
 type
-BasicUnit=real{single};
+BasicUnit=Float32;
 matrix3x4type=^matrix3x4type_;
 vectorintptr=^vectorint;
 
 pointreal=object
-  x,y:real;
+  x,y:Float32;
   function length:real;
   procedure normalize;
   procedure moveto(x_,y_:real);

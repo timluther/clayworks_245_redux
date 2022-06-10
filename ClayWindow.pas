@@ -27,8 +27,8 @@ type
       OnMouseMove : procedure(AWindow : TClayWindow; X,Y : SInt32) of object;
       OnMouseDown : procedure(AWindow : TClayWindow; X,Y : SInt32; AButton : SInt32) of object;
       OnMouseUp : procedure(AWindow : TClayWindow; X,Y : SInt32; AButton : SInt32) of object;
-      OnKeyDown : procedure(AWindow : TClayWindow; AKey : SInt32) of object;
-      OnKeyUp : procedure(AWindow : TClayWindow; AKey : SInt32) of object;
+      OnKeyDown : procedure(AWindow : TClayWindow; AKey : UInt32) of object;
+      OnKeyUp : procedure(AWindow : TClayWindow; AKey : UInt32) of object;
 
       {General}
       OnClear : procedure(AWindow : TClayWindow) of object;

@@ -18,7 +18,7 @@ PVdeleted=1;
 PVsetok=2;
 
 var
-    xoffs, yoffs : Float32;
+    xoffs, yoffs : longint;
 type
 
 NodeType=object(VectorReal)

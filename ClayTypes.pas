@@ -38,6 +38,16 @@ type
    PSInt64 = ^SInt64;
    PPSInt64 = ^PSInt64;
 
+   {32-bit float}
+   Float32 = Single;
+   PFloat32 = ^Float32;
+   PPFloat32 = ^PFloat32;
+
+   {64-bit float}
+   Float64 = Double;
+   PFloat64 = ^Float64;
+   PPFloat64 = ^PFloat64;
+
    {16-bit Helper}
    T16 = packed record
       case UInt8 of

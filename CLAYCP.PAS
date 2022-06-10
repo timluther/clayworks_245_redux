@@ -552,7 +552,7 @@ begin
         CMDload3dfile,CMDappend3dfile : with file_dialog(infoptr)^,texteditbox^ do begin
           varobjectpath:=Sdir;
           if fexist(txt) then
-            dorth^.docommand(command,@txt,filemode)
+            dorth^.docommand(command,pointer(txt),filemode)
           else
             filenotfound:=true;
         end;

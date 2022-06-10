@@ -982,26 +982,26 @@ begin
         if command=CMDload3dfile then
            maxselect:=0;
         case divsize of
-          CMDrwfile:readRW(stringptr(params)^);
-          CMDgeofile:readGEO(stringptr(params)^);
-          CMD3dfile:read3d(stringptr(params)^,command=CMDappend3dfile);
-          CMDobjfile:readOBJ(stringptr(params)^);
-          CMDgorfile:readgor(stringptr(params)^,command=CMDappend3dfile);
+          CMDrwfile:readRW(stdstring(params^));
+          CMDgeofile:readGEO(stdstring(params^));
+          CMD3dfile:read3d(string(params),command=CMDappend3dfile);
+          CMDobjfile:readOBJ(stdstring(params^));
+          CMDgorfile:readgor(stdstring(params^),command=CMDappend3dfile);
         end;
       end;
       CMDsave3dfile:begin
         case divsize of
-          CMDgorfile:writegor(stringptr(params)^);
-          CMD3dfile:write3d(stringptr(params)^);
-          CMDRWfile:writeRW(stringptr(params)^);
-          CMDPOVfile:writePOV(stringptr(params)^);
-          CMDOBJfile:writeOBJ(stringptr(params)^);
-          CMDPLGfile:writePLG(stringptr(params)^);
-          CMD3dsfile:write3DSasc(stringptr(params)^);
-          CMDGEOfile:writeGEO(stringptr(params)^);
-          CMDVRMLfile:writeVRML(stringptr(params)^);
-          CMDJAVAfile:writeJAVA(stringptr(params)^);
-          CMDTrueSpaceFile:writeCOBasc(stringptr(params)^);
+          CMDgorfile:writegor(stdstring(params^));
+          CMD3dfile: write3d(stdstring(params^));
+          CMDRWfile:writeRW(stdstring(params^));
+          CMDPOVfile:writePOV(stdstring(params^));
+          CMDOBJfile:writeOBJ(stdstring(params^));
+          CMDPLGfile:writePLG(stdstring(params^));
+          CMD3dsfile:write3DSasc(stdstring(params^));
+          CMDGEOfile:writeGEO(stdstring(params^));
+          CMDVRMLfile:writeVRML(stdstring(params^));
+          CMDJAVAfile:writeJAVA(stdstring(params^));
+          CMDTrueSpaceFile:writeCOBasc(stdstring(params^));
         end;
       end
       else begin

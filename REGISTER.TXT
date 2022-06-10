@@ -1,0 +1,12 @@
+
+- Welcome to ^uClayworks^u, 3D modelling software (c) T.Lewis -
+
+This version of Clayworks was written between 1992-1995 in Pascal and 
+assembler.
+
+It's provided here for nostaliga and historical interest only, no 
+warranty of fitness for purpose is expressed or implied.
+
+Enjoy!
+
+

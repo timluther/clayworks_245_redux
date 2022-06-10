@@ -1,7 +1,7 @@
 unit basic3d;
 
 INTERFACE
-uses colour,twindraw;
+uses ClayTypes, colour,twindraw;
 var
 {size of the colour ranges and the 'specular' size value}
 rangesize:word;
@@ -158,19 +158,19 @@ Scale:real=0.3;        {scaling value}
 
 type
 
-Vectorstruct=record
-  x,y,z:real;
+Vectorstruct= packed record
+  x,y,z : Float32;
 end;
 
-polygonstruct=record
+polygonstruct= packed record
   numsides:byte;
   p:array[0..3] of word;
   colour:byte;
   attrib:byte;
 end;
 
-JoinStruct=record
-  f,t:word
+JoinStruct= packed record
+  f,t:integer
 end;
 
 IMPLEMENTATION

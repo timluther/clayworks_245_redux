@@ -5,7 +5,7 @@ program Clayworks;
 uses
    {FPC}
    {$IFDEF UNIX}cthreads, {$ENDIF}
-   SysUtils, Classes,
+   SysUtils, Classes, Keyboard,
 
    {Clayworks}
    ClayTypes, ClayGlobal, ClayLog,
@@ -35,8 +35,8 @@ type
       FProgramPath : String;
       FTimeStamp : UInt32;
       FFPS : Float32;
-      procedure DoKeyDown(AWindow : TClayWindow; AKey : SInt32);
-      procedure DoKeyUp(AWindow : TClayWindow; AKey : SInt32);
+      procedure DoKeyDown(AWindow : TClayWindow; AKey : UInt32);
+      procedure DoKeyUp(AWindow : TClayWindow; AKey : UInt32);
       procedure DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
       procedure DoMouseMove(AWindow : TClayWindow; X, Y : SInt32);
       procedure DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
@@ -63,8 +63,8 @@ begin
    Window.OnMouseMove := @DoMouseMove;
    Window.OnMouseDown := @DoMouseDown;
    Window.OnMouseUp := @DoMouseUp;
-   Window.OnKeyDown := @DoKeyDown;
-   Window.OnKeyUp := @DoKeyUp;
+   Window.OnKeyDown  := @DoKeyDown;
+   Window.OnKeyUp  := @DoKeyUp;
 
    {Assign General Callbacks}
    Window.OnClear  := @DoWindowClear;
@@ -224,7 +224,8 @@ begin
       {Poll Clayworks Mouse Events}
       MPos();
       EventMPos();
-
+      {Poll Clayworks Keyboard Events}
+      eventkey();
       {Force Render of UI Application}
       //application^.draw();
    end;
@@ -256,12 +257,13 @@ begin
    application^.draw();
 end;
 
-procedure TClayworks.DoKeyDown(AWindow : TClayWindow; AKey : SInt32);
+procedure TClayworks.DoKeyDown(AWindow : TClayWindow; AKey : UInt32);
 begin
-
+   HostKey := AKey;
+   //HostScan := AScan;
 end;
 
-procedure TClayworks.DoKeyUp(AWindow : TClayWindow; AKey : SInt32);
+procedure TClayworks.DoKeyUp(AWindow : TClayWindow; AKey : UInt32);
 begin
 
 end;

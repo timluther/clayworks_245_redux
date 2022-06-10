@@ -186,6 +186,7 @@
       <Unit>
         <Filename Value="BASIC3D.PAS"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="basic3d"/>
       </Unit>
       <Unit>
         <Filename Value="BITMAP25.PAS"/>
