@@ -233,6 +233,9 @@ begin
 
       {Force Render of UI Application}
       //application^.draw();
+
+      {Ffree up the CPU - mouse drag draw won't sleep as they are loop locked}
+      Sleep(1);
    end;
 end;
 

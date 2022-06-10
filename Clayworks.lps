@@ -9,8 +9,8 @@
         <Filename Value="Clayworks.pas"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="203"/>
-        <CursorPos X="51" Y="228"/>
+        <TopLine Value="198"/>
+        <CursorPos X="72" Y="237"/>
         <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit>
@@ -19,8 +19,8 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="119"/>
-        <CursorPos X="72" Y="145"/>
+        <TopLine Value="34"/>
+        <CursorPos Y="62"/>
         <UsageCount Value="45"/>
         <Loaded Value="True"/>
       </Unit>
