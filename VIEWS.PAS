@@ -140,13 +140,6 @@ type
        7:(InfoTgroup: Tgroup);
    end;
 
-   Tobject=object
-     constructor create;
-     procedure free;
-     destructor done;virtual;
-   end;
-
-
    Tview_=object(trect)
      growmode,dragmode,state:byte;
      {eventmask,}pid,options:word;
@@ -242,17 +235,6 @@ perhaps, but it saves in code and memory size where these factors are
 importatnt. Make sure you are aware of these variables and their use}
 
 {tmp_currview:tview;}
-
-{***********************====--- TObject ---====***********************}
-Constructor Tobject.create;
-begin
-end;
-Destructor Tobject.done;
-begin
-end;
-Procedure Tobject.Free;
-begin
-end;
 
 {***********************====--- Tview ---====***********************}
 {make is for view whose dimensions are determined latter -they are minimal
