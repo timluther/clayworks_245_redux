@@ -5,7 +5,7 @@ program Clayworks;
 uses
    {FPC}
    {$IFDEF UNIX}cthreads, {$ENDIF}
-   SysUtils, Classes, Keyboard,
+   SysUtils, Classes,
 
    {Clayworks}
    ClayTypes, ClayGlobal, ClayLog,
@@ -13,7 +13,7 @@ uses
    {$IFDEF Windows} ClayWindowWin32, ClayRenderGDI, {$ENDIF}
 
    {Original Units}
-   tmaths, diskop, Sincos, colour, stdpal, pcx256,
+   tmaths, diskop, Sincos, colour, stdpal, pcx256, PITtimer,
    msmouse, chardef, strings, vectfont,
    gbasics, ggraph, Basic3d,
    tdb, tdeditb,
@@ -219,13 +219,18 @@ begin
    while (not ClayFlagQuit) do
    begin
       {Poll the Window for OS Messages}
-      Window.PumpOSMessages();
+      //Window.PumpOSMessages();
+
+      {NOTE : MPos also calls Window.PumpOSMessages() due to the UI locking in
+      loops that only call MPos() + EventMPos() it's the best place to put it
+      while the DOS methodology is in place}
 
       {Poll Clayworks Mouse Events}
       MPos();
       EventMPos();
       {Poll Clayworks Keyboard Events}
       eventkey();
+
       {Force Render of UI Application}
       //application^.draw();
    end;
@@ -239,15 +244,17 @@ end;
 
 procedure TClayworks.DoMouseDown(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
 begin
-   HostMouseX := X;
-   HostMouseY := Y;
+   //HostMessageLock := true;
+
+   //HostMouseX := X;
+   //HostMouseY := Y;
    HostMouseZ := 1;
 end;
 
 procedure TClayworks.DoMouseUp(AWindow : TClayWindow; X, Y : SInt32; AButton : SInt32);
 begin
-   HostMouseX := X;
-   HostMouseY := Y;
+   //HostMouseX := X;
+   //HostMouseY := Y;
    HostMouseZ := 0;
 end;
 

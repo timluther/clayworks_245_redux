@@ -354,6 +354,7 @@ begin
   with tmp_loader do
   while zm<>0{=oldzm} do begin
     mpos;
+
     oldbounds:=tmp_loader;
     if movegrowmode = tdmove then
       rpos(xm+offsets.x1,ym+offsets.y1)

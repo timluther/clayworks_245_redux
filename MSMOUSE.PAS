@@ -347,25 +347,19 @@ var
    AMousePos : TPoint;
 
 Begin
-  {Pump some messages here until we fix the structure}
-  PumpOSMessages();
 
   M1:=3;
 
    oldxm:=xm;oldym:=ym; oldzm:=zm;
    oldgridxm:=gridxm;oldgridym:=gridym;
 
+   {Pump some messages here until we fix the structure}
+   PumpOSMessages();
+
    {Set Mouse Values}
    xm := HostMouseX;
    ym := HostMouseY;
    zm := HostMouseZ;
-
-   {
-   AMousePos := LazForm.ScreenToClient(controls.Mouse.CursorPos);
-   xm := AMousePos.X;
-   ym := AMousePos.Y;}
-
-
 
    mouserect.rpos(xm,ym);
 
@@ -420,6 +414,7 @@ Begin
     drawmouse(xm,ym,oldxm,oldym,msdrawboth);
    end;
    {$Endif}
+
 end;
 
 Procedure xyfilter;
@@ -454,7 +449,7 @@ end;
 Procedure stoprepeatwait(wait:word);
 Var start,count:word;
 Begin
-  {
+ {
   start := GetTickCount;
   count:=0;
   While (zm<>0) and (count < wait) do

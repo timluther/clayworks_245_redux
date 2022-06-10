@@ -203,6 +203,7 @@
       <Unit>
         <Filename Value="PITTIMER.PAS"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="PITtimer"/>
       </Unit>
       <Unit>
         <Filename Value="STDPAL.PAS"/>

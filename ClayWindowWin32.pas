@@ -45,7 +45,7 @@ type
 
    TClayCanvasGDI = class(TClayCanvas)
    private
-      FWin32HDC : HDC; {Target HDC}
+
       FGDIPen : HPEN;
       FGDIPenOld : HPEN;
       FGDIBrush : HBRUSH;
@@ -57,6 +57,9 @@ type
       FGDIRegion : HRGN;
       FGDIRegionOld : HRGN;
    public
+      {NOTE : Moved to public for now as ClayRenderGDI currently needs it (XOR)}
+      FWin32HDC : HDC; {Target HDC}
+
       constructor Create(AWindow : TClayWindow); override;
       destructor Destroy(); override;
 
@@ -67,7 +70,6 @@ type
       procedure SetColour(ARed, AGreen, ABlue : UInt8); override;
       procedure SetClipRect(X0,Y0,X1,Y1 : SInt32); override;
    end;
-
 
 implementation
 
@@ -210,7 +212,7 @@ end;
 destructor TClayWindowWin32.Destroy();
 begin
    {Release Mouse Capture (if enabled)}
-   ReleaseCapture;
+   ReleaseCapture();
 
    {Release the HDC (we shouldn't really hold onto DCs but its only one)}
    ReleaseDC(FWin32Handle, FWin32HDC);
@@ -230,10 +232,10 @@ procedure TClayWindowWin32.PumpOSMessages();
 var
    AMessage : TMSG;
 begin
-   {Process All Messages}
-   while (PeekMessage(AMessage,0,0,0,PM_REMOVE)) do
+   {Note : PeekMessage() with PM_REMOVE is faster/better than GetMessage()}
+   while (PeekMessage(AMessage, FWin32Handle,0,0,PM_REMOVE)) do
    begin
-      {Translate and dispatch message to the window messsage handler}
+      {Translate and dispatch (keyboard) messages to the window messsage handler}
       TranslateMessage(AMessage);
       DispatchMessage(AMessage);
    end;
@@ -246,8 +248,6 @@ begin
 end;
 
 function TClayWindowWin32.ProcessOSMessage(Win32Msg : UINT; Win32wParam : wPARAM; Win32lParam : LPARAM) : LRESULT;
-var
-   I : UInt32;
 begin
    Result := -1;
 
@@ -286,11 +286,13 @@ begin
       begin
          if OnMouseMove<>nil then
             OnMouseMove(Self, P32(@Win32lparam)^.Low, P32(@Win32lparam)^.High);
+         //Result := 0;
       end;
       WM_LBUTTONDOWN :
       begin
          if OnMouseDown<>nil then
             OnMouseDown(Self, P32(@Win32lparam)^.Low, P32(@Win32lparam)^.High, 0);
+         //Result := 0;
       end;
       WM_MBUTTONDOWN :
       begin
@@ -304,6 +306,7 @@ begin
       begin
          if OnMouseUp<>nil then
             OnMouseUp(Self, P32(@Win32lparam)^.Low, P32(@Win32lparam)^.High, 0);
+         //Result := 0;
       end;
       WM_MBUTTONUP :
       begin
@@ -339,8 +342,8 @@ begin
       end;
    end;
 
-   if (Result = -1) then {Message not handled. Pass to Windows}
-      Result := DefWindowProc(FWin32Handle,Win32Msg,Win32wParam,Win32lParam);
+   if (Result = -1) then {Message not handled. Pass to Windows default handler}
+      Result := DefWindowProc(FWin32Handle, Win32Msg, Win32wParam, Win32lParam);
 end;
 
 { TClayCanvasGDI }
@@ -374,11 +377,13 @@ end;
 procedure TClayCanvasGDI.Rect(X0, Y0, X1, Y1 : SInt32);
 var
    ARect : TRect;
+   OldROP : SInt32;
 begin
    ARect.Left := X0;
    ARect.Top := Y0;
    ARect.Right := X1;
    ARect.Bottom := Y1;
+   SetDCPenColor(FWin32HDC, FGDIBrushTransparent);
    FillRect(FWin32HDC, ARect, FGDIBrush);
 end;
 
@@ -395,6 +400,11 @@ begin
    {Keep the GDI pen and brush the same for convenience}
    SetDCPenColor(FWin32HDC, C);
    SetDCBrushColor(FWin32HDC, C);
+
+   {XOR Operations/pens are specified like this}
+   {if (DrawWithXOR) then
+      SetROP2(GDICanvas.FWin32HDC, R2_XORPEN) else
+      SetROP2(GDICanvas.FWin32HDC, R2_COPYPEN);}
 end;
 
 procedure TClayCanvasGDI.SetClipRect(X0, Y0, X1, Y1 : SInt32);

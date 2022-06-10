@@ -65,13 +65,10 @@ begin
    ColourPen.B := ColourMap^[T_col].B * 4;
    GDICanvas.SetColour(ColourPen.R,ColourPen.G,ColourPen.B);
 
-   {Set Xor Write Mode}
-
-   {TODO : Actually do it}
-
-   {if (t_writemode = xorput) then
-      LazCanvas.Pen.Mode := pmXor else
-      LazCanvas.Pen.Mode := pmCopy;}
+   {Set GDI Xor Write Mode}
+   if (t_writemode = xorput) then
+      SetROP2(GDICanvas.FWin32HDC, R2_XORPEN) else
+      SetROP2(GDICanvas.FWin32HDC, R2_COPYPEN);
 end;
 
 function set_mode(mode : byte) : boolean;
