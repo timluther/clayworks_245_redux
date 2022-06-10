@@ -2,6 +2,8 @@ unit CDIALOG;
 
 interface
 uses
+   {FPC}
+   SysUtils,
    {Clayworks}
    ClayTypes, ClayGlobal,
    gbasics,views,twinb,ggraph,diskop,
@@ -225,37 +227,46 @@ end;
 
 
 Procedure Sortarray(data:stringarray;datasize:word;maxelem:integer);
-var lop2,lop:byte;
-    {dataptr1,dataptr2:^stdstring;}
-
+var
+   AStr : stdstring;
+   lop2,lop:byte;
+   {dataptr1,dataptr2:^stdstring;}
 Begin
   {dataptr1:=data;
   dataptr2:=data;}
   For lop:=1 to maxelem do begin
     {inc(dataptr1,datasize);}
-    For lop2:=lop to maxelem do begin
+    For lop2:=lop to maxelem do
+    begin
       {inc(dataptr2,datasize);
       if dataptr2^<dataptr1^ then}
-      if data^[lop2]<data^[lop] then
-        fswap(data^[lop2],data^[lop],datasize)
-        {fswap(dataptr1^,dataptr2^,datasize);}
+      if data^[lop2] < data^[lop] then
+      begin
+         AStr := data^[lop];
+         data^[lop] := data^[lop2];
+         data^[lop2] := AStr;
+      end;
+      {fswap(data^[lop2],data^[lop],datasize)}
+      {fswap(dataptr1^,dataptr2^,datasize);}
     end;
   end;
 end;
 
 function inputdir(path,filter:string;attrfilter:word;var count:integer):stringarray;
 var
-   //DirInfo:SearchRec;
-   info:stringarray;
-   maxopts:integer;
+   DirInfo : TSearchRec;
+   info : stringarray;
+   maxopts : integer;
 
 Begin
-  (*
+   {if no path specified, default to ClayGlobal.pas value}
+   if path='' then path := clay_dir;
+
   maxopts:=numoffiles(path,filter,attrfilter);
   {if attrfilter=directory then inc(maxopts,2);}
   getmem(info,(1+maxopts)*21);
   count:=0;
-  if attrfilter=anyfile then
+  if attrfilter=faanyfile then
     info^[0]:='No files'
   else begin
     info^[0]:='No dirs';
@@ -267,22 +278,22 @@ Begin
 
   {if dirs then inc(count);}
   {oldcount:=count;}
-  FindFirst(path+filter, attrfilter, DirInfo);
-  while DosError=0 do begin
-    if(dirinfo.attr=attrfilter)or
-    ((attrfilter=anyfile)and(dirinfo.attr<>directory))
-    and(count<255)  then begin
-      if DirInfo.attr=directory then
+
+  if FindFirst(path+filter, attrfilter, DirInfo)=0 then
+  repeat
+    if (((DirInfo.Attr and attrfilter) <> 0) or
+    ((attrfilter = faAnyFile) and ((DirInfo.Attr and fadirectory) = 0))) and (count<255) then
+    begin
+      if DirInfo.attr=fadirectory then
         info^[count+1]:=DirInfo.Name
       else
         info^[count+1]:=DirInfo.Name;
       inc(count);
     end;
-    FindNext(DirInfo);
-  end;
+  until (FindNext(DirInfo)<>0);
+
   sortarray(info,stringsize+1,maxopts);
   inputdir:=info;
-  *)
 End;
 
 constructor listWbar_.create(x,y,x2_,y2_:integer;info_:stringarray;maxopts_,offset:integer;destroyold_:boolean);
@@ -359,14 +370,14 @@ begin
   insert(texteditbox);
 
   fsplit(texteditbox^.txt,sdir,sname,sext);
-  list:=inputdir(Sdir,filter,1,listcount);
+  list:=inputdir(Sdir,filter,faanyfile,listcount);
 
   files:=new(listwbar,create(x1+10,y2-168,110,117,list,listcount,3,true));
   files^.growmode:=TGgrowallx+TGgrowally;
   files^.pid:=PIDfiles;
   insert(files);
 
-  list:=inputdir(Sdir,'*.*',2,listcount);
+  list := inputdir(Sdir,'*.*',fadirectory,listcount);
 
   paths:=new(listwbar,create(x1+150,y2-168,110,101,list,listcount,3,true));
   paths^.growmode:=TGgrowallx+TGgrowally;
@@ -391,7 +402,7 @@ var temp:integer;
     list:stringarray;
     listcount:integer;
 begin
-  list:=inputdir(Sdir,'*.*',2,listcount);
+  list:=inputdir(Sdir,'*.*',faDirectory,listcount);
   paths^.setlist(list,listcount);
 end;
 
@@ -400,7 +411,7 @@ var temp:integer;
     list:stringarray;
     listcount:integer;
 begin
-  list:=inputdir(Sdir,Sname+Sext,1,listcount);
+  list:=inputdir(Sdir,Sname+Sext,faanyfile,listcount);
   files^.setlist(list,listcount);
 end;
 

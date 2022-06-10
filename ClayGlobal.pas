@@ -14,15 +14,17 @@ var
    PumpOSMessages : procedure() of object;
 
    {Host Input Note: depreciated}
-   HostMouseX,HostMouseY,HostMouseZ : SInt32;
    HostMessageLock : Boolean;
-
+   HostMouseX,HostMouseY,HostMouseZ : SInt32;
    HostKey : UInt16;
    HostScan : UInt16;
 
-   {Old Clayworks Keyboard input}
+   {Clayworks Keyboard input (DOS Scancode style)}
    scancode:byte;
    charcode:char;
+
+   {Global Paths}
+   font_path,clay_dir:string[80];
 
 const
    backspacekey=chr(8);

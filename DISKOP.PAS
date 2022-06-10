@@ -35,7 +35,7 @@ type
 Function cd(path:string):string;
 Function fragname(path:string;frag:fragtype):string;
 Function gtdir:string;
-Function numoffiles(path,filter:string;attrfilter:word):integer;
+Function numoffiles(path,filter:string;attrfilter:UInt32):integer;
 Function NumOfDrives:byte;
 Function CurrentDrive:byte;
 Function Truncatepath(path:string):string;
@@ -309,17 +309,18 @@ Begin
   instring:=out;
 end;
 
-Function numoffiles(path,filter:string;attrfilter:word):integer;
+Function numoffiles(path,filter:string;attrfilter:UInt32):integer;
 var
-   SearchRec : TSearchRec;
+   count:word;dirinfo : tsearchrec;
 Begin
-  Result := 0;
-   if FindFirst(path, faAnyFile, SearchRec)<>0 then
-   begin
-      repeat
-         Result += 1;
-      until FindNext(SearchRec) <> 0;
-   end;
+  count:=0;
+  if FindFirst(path+filter, attrfilter, DirInfo) = 0 then
+  repeat
+    if (((DirInfo.Attr and attrfilter) <> 0) or
+    ((attrfilter = faAnyFile) and ((DirInfo.Attr and fadirectory) = 0))) then
+    inc(count);
+  until FindNext(DirInfo)<>0;
+  numoffiles:=count;
 end;
 
 {Procedure inputdrives(var disks:menutype);

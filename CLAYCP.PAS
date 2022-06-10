@@ -381,7 +381,6 @@ var
    GraphInstalled:boolean;
    dorth:delta_orth;
    PerspectiveINT:longint;
-   font_path,clay_dir:string[80];
    textfile,helpfile,registerfile,objectinfo:pchar;
    varFontpath,varobjectpath,exepath:string;
    lop:word;

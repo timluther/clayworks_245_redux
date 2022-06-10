@@ -311,10 +311,11 @@ begin
       begin
 
       end;
-      WM_MOUSEWHEEL:
+      WM_MOUSEWHEEL :
       begin
 
       end;
+
    end;
 
    if (Result = -1) then {Message not handled. Pass to Windows}
