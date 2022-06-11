@@ -392,7 +392,7 @@ Var u:VectorReal;
 Begin
   with poly^ do
     CalcSurfNormal(thred^[p[1]],thred^[p[0]],thred^[p[2]],U);
-  intensity:=((SC.colourdepth-1) shr 1)+round(dot(u,lightvec.uvec));
+    intensity := ((SC.colourdepth-1) shr 1)+round(dot(u,lightvec.uvec));
 end;
 
 
@@ -541,7 +541,8 @@ end;
 
 procedure objtype_.filler(mode:byte);
 Var
-lop2,oldcol,testattrib,shademode,amask:byte;facetowards:boolean;
+lop2,oldcol,testattrib,shademode,amask:byte;
+facetowards:boolean;
 dx1,dy1,dx2,dy2:integer;
 lop:word;
 i:array[0..3]of byte;
@@ -558,9 +559,17 @@ Begin
       else begin amask:=255;shademode:=0;end;
     end;
     For lop:=0 to maxpolys-1 do with currpoly^,texturebank[textureref] do begin
-      for lop2:=0 to 3 do begin
-        pn[lop2].x:=twod^[p[lop2]].x;
-        pn[lop2].y:=twod^[p[lop2]].y;
+      for lop2:=0 to 3 do
+      begin
+        if p[lop2] > Self.Maxpoints then
+        begin
+            writeln('out of range');
+        end else
+        begin
+           pn[lop2].x := twod^[ p[lop2] ].x;
+           pn[lop2].y := twod^[ p[lop2] ].y;
+
+        end;
       end;
       dx1:=pn[1].x-pn[0].x;
       dy1:=pn[1].y-pn[0].y;
@@ -568,7 +577,7 @@ Begin
       dy2:=pn[2].y-pn[0].y;
       facetowards:=(pattrib and PaDoubleSided<>0) or((dx1 * dy2) > (dx2 * dy1));
       if (facetowards) then begin
-        testattrib:=(Pattrib and amask)or Shademode;
+        testattrib:=(Pattrib and amask) or Shademode;
         if numsides=2 then begin
           t_col:=palref;
           line(pn[0].x,pn[0].y,pn[1].x,pn[1].y);
@@ -586,10 +595,26 @@ Begin
           if numsides>3 then triangle(pn[0].x,pn[0].y,pn[3].x,pn[3].y,pn[2].x,pn[2].y);
         end else if Testattrib and PaSmooth<>0 then begin
           for lop2:=0 to numsides-1 do begin
-            i[lop2]:=palref+lop2{intensity(n,addval,colour,Pattrib)};
+            {Debug render : show Triangle Index as colour}
+            //i[lop2]:=palref+ lop2 {intensity(n,addval,colour,Pattrib)};
+
+            {Supposed to be goruad/phong but flat shaded for now}
+            {Calculate surface colour}
+            i[lop2]:= {palref +} intensity(currpoly);
           end;
+
+          {Flat Shading}
+          {T_col := i[0] div 8;
+          T_fillcol := i[0] div 8;
+          triangle(pn[0].x,pn[0].y,pn[1].x,pn[1].y,pn[2].x,pn[2].y);
+          if numsides > 3 then
+          triangle(pn[0].x,pn[0].y,pn[3].x,pn[3].y,pn[2].x,pn[2].y);
+          }
+          {gouraud shading}
           Gtriangle(pn[0].x,pn[0].y,pn[1].x,pn[1].y,pn[2].x,pn[2].y,i[0],i[1],i[2]);
-          if numsides>3 then Gtriangle(pn[0].x,pn[0].y,pn[3].x,pn[3].y,pn[2].x,pn[2].y,i[0],i[3],i[2]);
+          if numsides > 3 then
+          Gtriangle(pn[0].x,pn[0].y,pn[3].x,pn[3].y,pn[2].x,pn[2].y,i[0],i[3],i[2]);
+
         end else begin
           t_fillcol:=palref;
           triangle(pn[0].x,pn[0].y,pn[1].x,pn[1].y,pn[2].x,pn[2].y);

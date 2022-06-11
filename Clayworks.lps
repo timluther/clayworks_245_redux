@@ -8,9 +8,8 @@
       <Unit>
         <Filename Value="Clayworks.pas"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <CursorPos X="21" Y="15"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -18,9 +17,9 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="3"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="34"/>
-        <CursorPos Y="62"/>
-        <UsageCount Value="48"/>
+        <TopLine Value="52"/>
+        <CursorPos Y="76"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -28,7 +27,7 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos Y="11"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="ClayTypes.pas"/>
@@ -36,7 +35,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="20"/>
         <CursorPos X="4" Y="42"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="ClayWindow.pas"/>
@@ -45,7 +44,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="47"/>
         <CursorPos X="63" Y="31"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -53,14 +52,14 @@
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="4" Y="9"/>
-        <UsageCount Value="48"/>
+        <UsageCount Value="50"/>
       </Unit>
       <Unit>
         <Filename Value="ClayGlobal.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="4" Y="14"/>
-        <UsageCount Value="46"/>
+        <UsageCount Value="48"/>
       </Unit>
       <Unit>
         <Filename Value="TMATHS.PAS"/>
@@ -69,7 +68,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="58"/>
         <CursorPos X="3" Y="78"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="SINCOS.PAS"/>
@@ -78,7 +77,7 @@
         <EditorIndex Value="-1"/>
         <WindowIndex Value="1"/>
         <CursorPos X="9" Y="7"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="MSMOUSE.PAS"/>
@@ -87,7 +86,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="339"/>
         <CursorPos X="41" Y="351"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="GBASICS.PAS"/>
@@ -96,7 +95,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="887"/>
         <CursorPos X="6" Y="931"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="GGRAPH.PAS"/>
@@ -104,9 +103,9 @@
         <UnitName Value="Ggraph"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="501"/>
-        <CursorPos X="15" Y="530"/>
-        <UsageCount Value="34"/>
+        <TopLine Value="507"/>
+        <CursorPos X="28" Y="519"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -115,7 +114,7 @@
         <UnitName Value="colour"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="4" Y="15"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TDEDITB.PAS"/>
@@ -124,7 +123,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="81"/>
         <CursorPos X="21" Y="227"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TWINB.PAS"/>
@@ -133,7 +132,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="911"/>
         <CursorPos X="3" Y="939"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="VIEWS.PAS"/>
@@ -142,7 +141,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="939"/>
         <CursorPos X="43" Y="1008"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TMENUST.PAS"/>
@@ -151,7 +150,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="440"/>
         <CursorPos Y="486"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="CDIALOG.PAS"/>
@@ -160,7 +159,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="466"/>
         <CursorPos X="26" Y="493"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TDWIN.PAS"/>
@@ -169,7 +168,7 @@
         <WindowIndex Value="1"/>
         <TopLine Value="292"/>
         <CursorPos X="31" Y="296"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -178,16 +177,16 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="427"/>
         <CursorPos X="12" Y="470"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="ClayRenderGDI.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="4"/>
         <WindowIndex Value="1"/>
-        <TopLine Value="31"/>
-        <CursorPos X="26" Y="27"/>
-        <UsageCount Value="34"/>
+        <TopLine Value="135"/>
+        <CursorPos X="58" Y="148"/>
+        <UsageCount Value="36"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -197,7 +196,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="283"/>
         <CursorPos X="78" Y="320"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TWINDRAW.PAS"/>
@@ -205,7 +204,7 @@
         <UnitName Value="Twindraw"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="28" Y="5"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="CHARDEF.PAS"/>
@@ -214,15 +213,17 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="201"/>
         <CursorPos X="32" Y="224"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="TDB.PAS"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="tdb"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="23" Y="20"/>
-        <UsageCount Value="34"/>
+        <EditorIndex Value="1"/>
+        <TopLine Value="575"/>
+        <CursorPos X="12" Y="607"/>
+        <UsageCount Value="36"/>
+        <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="VECTFONT.PAS"/>
@@ -231,14 +232,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="141"/>
         <CursorPos Y="172"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="PCX256.PAS"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="21" Y="30"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="BASIC3D.PAS"/>
@@ -246,7 +247,7 @@
         <UnitName Value="basic3d"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="106"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="BITMAP25.PAS"/>
@@ -254,7 +255,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="870"/>
         <CursorPos X="38" Y="317"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="GADGETS.PAS"/>
@@ -262,7 +263,7 @@
         <UnitName Value="gadgets"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="6" Y="4"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="LCD.PAS"/>
@@ -270,14 +271,14 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="46"/>
         <CursorPos X="24" Y="74"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="PITTIMER.PAS"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PITtimer"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="STDPAL.PAS"/>
@@ -286,7 +287,7 @@
         <WindowIndex Value="-1"/>
         <TopLine Value="-1"/>
         <CursorPos X="-1" Y="-1"/>
-        <UsageCount Value="34"/>
+        <UsageCount Value="36"/>
       </Unit>
       <Unit>
         <Filename Value="..\J\Jink\JFrameWork\JWindow\JWindowWin32.pas"/>
@@ -294,14 +295,14 @@
         <WindowIndex Value="2"/>
         <TopLine Value="516"/>
         <CursorPos X="45" Y="549"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
         <Filename Value="..\J\Jink\JFrameWork\JWindow\JWindow.pas"/>
         <WindowIndex Value="2"/>
         <CursorPos X="39" Y="49"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -310,7 +311,7 @@
         <WindowIndex Value="2"/>
         <TopLine Value="31"/>
         <CursorPos X="29" Y="43"/>
-        <UsageCount Value="23"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -353,9 +354,9 @@
         <Filename Value="..\J\Jink\JFrameWork\JRender\JRenderCanvasGDI.pas"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="2"/>
-        <TopLine Value="55"/>
-        <CursorPos X="5" Y="3"/>
-        <UsageCount Value="21"/>
+        <TopLine Value="588"/>
+        <CursorPos X="49" Y="606"/>
+        <UsageCount Value="22"/>
         <Loaded Value="True"/>
       </Unit>
       <Unit>
@@ -484,9 +485,8 @@
         <Filename Value="..\Clayworks_Files\ClayWorks2.45\TDB.PAS"/>
         <UnitName Value="tdb"/>
         <EditorIndex Value="-1"/>
-        <WindowIndex Value="1"/>
-        <TopLine Value="105"/>
-        <CursorPos X="3" Y="130"/>
+        <TopLine Value="546"/>
+        <CursorPos X="28" Y="579"/>
         <UsageCount Value="10"/>
       </Unit>
       <Unit>
@@ -503,31 +503,133 @@
         <CursorPos X="3" Y="1207"/>
         <UsageCount Value="10"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\Clayworks_Files\ClayWorks2.45\VGA16.PAS"/>
+        <UnitName Value="vga16"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="1314"/>
+        <CursorPos X="71" Y="1337"/>
+        <UsageCount Value="10"/>
+        <Loaded Value="True"/>
+      </Unit>
     </Units>
-    <JumpHistory HistoryIndex="5">
+    <JumpHistory HistoryIndex="28">
       <Position>
-        <Filename Value="TDWIN.PAS"/>
-        <Caret Line="219" Column="13" TopLine="193"/>
-      </Position>
-      <Position>
-        <Filename Value="ClayWindowWin32.pas"/>
-        <Caret Line="62" TopLine="34"/>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="603" TopLine="571"/>
       </Position>
       <Position>
         <Filename Value="ClayRenderGDI.pas"/>
-        <Caret Line="149" Column="4" TopLine="111"/>
+        <Caret Line="113" TopLine="89"/>
       </Position>
       <Position>
-        <Filename Value="ClayRenderGDI.pas"/>
-        <Caret Line="124" Column="31" TopLine="98"/>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="603" TopLine="571"/>
       </Position>
       <Position>
-        <Filename Value="ClayRenderGDI.pas"/>
-        <Caret Line="140" Column="35" TopLine="108"/>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" TopLine="571"/>
       </Position>
       <Position>
-        <Filename Value="TDWIN.PAS"/>
-        <Caret Line="233" Column="18" TopLine="208"/>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="77" Column="28" TopLine="51"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="596" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="596" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="596" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="603" TopLine="571"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" Column="53" TopLine="562"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="128" Column="18" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="598" Column="41" TopLine="566"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="117" Column="57" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="128" Column="22" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="390" Column="28" TopLine="346"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="395" Column="14" TopLine="351"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="598" Column="45" TopLine="555"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="601" Column="45" TopLine="558"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="128" Column="22" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="..\Clayworks_Files\ClayWorks2.45\VGA16.PAS"/>
+        <Caret Line="1319" Column="22" TopLine="1314"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="129" Column="20" TopLine="103"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="390" Column="28" TopLine="379"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="599" Column="38" TopLine="573"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="549" Column="26" TopLine="524"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="544" Column="23" TopLine="524"/>
+      </Position>
+      <Position>
+        <Filename Value="TDB.PAS"/>
+        <Caret Line="612" Column="59" TopLine="566"/>
       </Position>
     </JumpHistory>
     <RunParams>

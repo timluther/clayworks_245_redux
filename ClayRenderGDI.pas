@@ -46,9 +46,21 @@ implementation
 uses
    Views;
 
+const
+   DC_BRUSH = 18; {Win32 DC_BRUSH}
+   DC_PEN = 19; {Win32 DC_PEN}
+   GRADIENT_FILL_RECT_H = $00;
+   GRADIENT_FILL_RECT_V = $01;
+   GRADIENT_FILL_TRIANGLE = $02;
+   GRADIENT_FILL_OP_FLAG = $ff;
+
 var
    ColourPen : TColour3;
    ColourBrush : TColour3;
+
+
+function AlphaBlend(hdcDest: HDC; nXOriginDest, nYOriginDest, nWidthDest, nHeightDest: Integer; hdcSrc: HDC; nXOriginSrc, nYOriginSrc, nWidthSrc, nHeightSrc: Integer; blendFunction: TBlendFunction): BOOL; stdcall; external 'msimg32.dll';
+function GradientFill(DC: HDC; p2: PTriVertex; p3: ULONG; p4: Pointer; p5, p6: ULONG): BOOL; stdcall; external 'msimg32.dll';
 
 procedure SetBrushColour();
 begin
@@ -93,13 +105,76 @@ begin
 end;
 
 procedure GTriangle(xa, ya, xb, yb, xc, yc, ia, ib, ic : integer);
+var
+   VArray : array [0..2] of TRIVERTEX;
+   gTriangle : GRADIENT_TRIANGLE;
 begin
+   VArray[0].x     := xa;
+   VArray[0].y     := ya;
+   VArray[0].Red   := (ia * 4) shl 8;
+   VArray[0].Green := (ia * 4) shl 8;
+   VArray[0].Blue  := (ia * 4) shl 8;
+   VArray[0].Alpha := $0000;
 
+   VArray[1].x     := xb;
+   VArray[1].y     := yb;
+   VArray[1].Red   := (ib * 4) shl 8;
+   VArray[1].Green := (ib * 4) shl 8;
+   VArray[1].Blue  := (ib * 4) shl 8;
+   VArray[1].Alpha := $0000;
+
+   VArray[2].x     := xc;
+   VArray[2].y     := yc;
+   VArray[2].Red   := (ic * 4) shl 8;
+   VArray[2].Green := (ic * 4) shl 8;
+   VArray[2].Blue  := (ic * 4) shl 8;
+   VArray[2].Alpha := $0000;
+
+   {VArray[0].x     := xa;
+   VArray[0].y     := ya;
+   VArray[0].Red   := (ColourMap^[ia].R * 4) shl 8;
+   VArray[0].Green := (ColourMap^[ia].G * 4) shl 8;
+   VArray[0].Blue  := (ColourMap^[ia].B * 4) shl 8;
+   VArray[0].Alpha := $0000;
+
+   VArray[1].x     := xb;
+   VArray[1].y     := yb;
+   VArray[1].Red   := (ColourMap^[ib].R * 4) shl 8;
+   VArray[1].Green := (ColourMap^[ib].G * 4) shl 8;
+   VArray[1].Blue  := (ColourMap^[ib].B * 4) shl 8;
+   VArray[1].Alpha := $0000;
+
+   VArray[2].x     := xc;
+   VArray[2].y     := yc;
+   VArray[2].Red   := (ColourMap^[ic].R * 4) shl 8;
+   VArray[2].Green := (ColourMap^[ic].G * 4) shl 8;
+   VArray[2].Blue  := (ColourMap^[ic].B * 4) shl 8;
+   VArray[2].Alpha := $0000; }
+
+   gTriangle.Vertex1 := 0;
+   gTriangle.Vertex2 := 1;
+   gTriangle.Vertex3 := 2;
+
+   GradientFill(GDICanvas.FWin32HDC, VArray, 3, @gTriangle, 1, GRADIENT_FILL_TRIANGLE);
 end;
 
 procedure Triangle(xa, ya, xb, yb, xc, yc : integer);
+var
+   ARect : Types.TRect;
+   ITriangle : array[0..2] of array[0..1] of Integer;
 begin
+   ARect.Left := SC.Viewport.x1;
+   ARect.Right := SC.Viewport.x2+1;
+   ARect.Top := SC.Viewport.y1;
+   ARect.Bottom := SC.Viewport.y2+1;
+   GDICanvas.SetClipRect(ARect.Left,ARect.Top,ARect.Right,ARect.Bottom);
 
+   SetBrushColour();
+
+   ITriangle[0][0] := xa; ITriangle[0][1] := ya;
+   ITriangle[1][0] := xb; ITriangle[1][1] := yb;
+   ITriangle[2][0] := xc; ITriangle[2][1] := yc;
+   Polygon(GDICanvas.FWin32HDC, @ITriangle, 3);
 end;
 
 procedure Line(x1, y1, x2, y2 : integer);
