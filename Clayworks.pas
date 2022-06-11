@@ -20,7 +20,7 @@ uses
    views, twinb, tdwin, twindraw,
    gadgets, cdialog, tmenust,
 
-   {Note : temporary, old main program unit but lots of stuff in it}
+   {Main Clayworks application class}
    claycp;
 
 type

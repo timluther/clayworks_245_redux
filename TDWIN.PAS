@@ -309,7 +309,6 @@ const
 var
   lop:byte;
 begin
-
   with editobject^ do begin
     if what_to_draw and Draw_perspective<>0 then
     if maxpoints>0 then begin
@@ -1400,13 +1399,9 @@ begin
         SC.viewport.intersect(self);
         SC.viewport.intersect(owner^.owner^);
 
+        {Set Xor}
+        t_col:={fgcol xor backcol}xorgreen;
 
-
-        //Lazarus doesn't do it this way
-        //t_col:={fgcol xor backcol}xorgreen;
-
-        //Lazarus
-        t_col := linecolour;
 
         {get 2d input from user}
         case drawing_mode of

@@ -11,7 +11,7 @@ uses
    Types, SysUtils,
    {ClayWorks}
    ClayTypes, ClayGlobal, ClayWindowWin32,
-   Gbasics, chardef, tmaths, stdpal, colour;
+   Gbasics, chardef, tmaths, colour;
 
 function set_mode(mode:byte):boolean;
 Procedure bar(x1,y1,x2,y2:integer);
@@ -78,7 +78,6 @@ end;
 
 procedure bar(x1, y1, x2, y2 : integer);
 var
-   OffsetX, OffsetY : Integer;
    ARect : Types.TRect;
 begin
    ARect.Left := SC.Viewport.x1;
@@ -90,10 +89,7 @@ begin
 
    SetBrushColour();
 
-   OffsetX := Root^.x1; //SC.ScreenPort.X1 + SC.Viewport.X1 + Root^.x1;
-   OffsetY := Root^.y1; //SC.ScreenPort.Y1 + SC.Viewport.Y1 + Root^.y1;
-
-   GDICanvas.Rect(OffsetX + x1,OffsetY + y1, OffsetX + x2 + 1, OffsetY + y2 + 1);
+   GDICanvas.Rect(x1, y1, x2 + 1, y2 + 1);
 end;
 
 procedure GTriangle(xa, ya, xb, yb, xc, yc, ia, ib, ic : integer);
@@ -108,7 +104,6 @@ end;
 
 procedure Line(x1, y1, x2, y2 : integer);
 var
-   OffsetX, OffsetY : Integer;
    ARect : Types.TRect;
 begin
    ARect.Left := SC.Viewport.x1;
@@ -120,15 +115,11 @@ begin
 
    SetPenColour();
 
-   OffsetX := Root^.x1;
-   OffsetY := Root^.y1;
-
-   GDICanvas.Line(OffsetX + x1, OffsetY + y1, OffsetX + x2, OffsetY + y2);
+   GDICanvas.Line(x1, y1, x2, y2);
 end;
 
 procedure Hline(x1, x2, y : Integer);
 var
-   OffsetX, OffsetY : Integer;
    ARect : Types.TRect;
 begin
    ARect.Left := SC.Viewport.x1;
@@ -140,15 +131,11 @@ begin
 
    SetPenColour();
 
-   OffsetX := Root^.x1;
-   OffsetY := Root^.y1;
-
-   GDICanvas.Line(OffsetX + x1, OffsetY + y, OffsetX + x2  + 1, OffsetY + y);
+   GDICanvas.Line(x1, y, x2  + 1, y);
 end;
 
 procedure Vline(x, y1, y2 : Integer);
 var
-   OffsetX, OffsetY : Integer;
    ARect : Types.TRect;
 begin
    ARect.Left := SC.Viewport.x1;
@@ -160,10 +147,7 @@ begin
 
    SetPenColour();
 
-   OffsetX := Root^.x1;
-   OffsetY := Root^.y1;
-
-   GDICanvas.Line(OffsetX + x, OffsetY + y1, OffsetX + x, OffsetY+ y2 + 1);
+   GDICanvas.Line(x, y1, x, y2 + 1);
 end;
 
 procedure putpixel(x1, y1 : Integer);
@@ -225,7 +209,6 @@ end;
 
 procedure Drawbytes(x1, Y1 : Integer; pic : bytearray; nbytes : byte);
 var
-   OffsetX, OffsetY : Integer;
    IWidth,IHeight : Integer;
    PX,PY : Integer;
    IX,IY : Integer;
@@ -242,9 +225,6 @@ begin
 
    SetPenColour();
 
-   OffsetX := Root^.x1;
-   OffsetY := Root^.y1;
-
    {Calculate Image Width and Height}
    IWidth := 8;
    IHeight := nbytes;
@@ -259,9 +239,9 @@ begin
          ABit := (AByte shr (IX mod 8)) and 1;
 
          {Invert X Pixel Order}
-         PX := (OffsetX + X1 + IWidth) - (IX+1);
-         //PX := OffsetX + X1 + IX;
-         PY := OffsetY + Y1 + IY;
+         PX := (X1 + IWidth) - (IX+1);
+         //PX := X1 + IX;
+         PY := Y1 + IY;
 
          {Render Pixel}
          if ABit=1 then GDICanvas.Pixel(PX, PY, ColourPen);
@@ -271,7 +251,6 @@ end;
 
 procedure Drawbytesxy(x1, y1 : Integer; pic : bytearray; xbytes, ybytes : byte);
 var
-   OffsetX, OffsetY : Integer;
    IWidth,IHeight : Integer;
    PX,PY : Integer;
    IX,IY : Integer;
@@ -289,9 +268,6 @@ begin
 
    SetPenColour();
 
-   OffsetX := Root^.x1;
-   OffsetY := Root^.y1;
-
    IWidth := XBytes*8;
    IHeight := YBytes;
 
@@ -305,9 +281,9 @@ begin
          ABit := (AByte shr (IX mod 8)) and 1;
 
          {Invert X Pixel Order}
-         PX := (OffsetX + X1 + IWidth) - (IX+1);
-         //PX := OffsetX + X1 + IX;
-         PY := OffsetY + Y1 + IY;
+         PX := (X1 + IWidth) - (IX+1);
+         //PX := X1 + IX;
+         PY := Y1 + IY;
 
          {Render Pixel}
          if ABit=1 then GDICanvas.Pixel(PX, PY, ColourPen);

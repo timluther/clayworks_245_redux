@@ -10,15 +10,12 @@ uses
     gbasics,ggraph,colour,
     Basic3d;
 
-
 const makebig=10;
 {setpolyvertex return codes}
 PVnotset=0;
 PVdeleted=1;
 PVsetok=2;
 
-var
-    xoffs, yoffs : longint;
 type
 
 NodeType=object(VectorReal)
@@ -44,7 +41,6 @@ Nodearray=^Nodearray_;
 Nodearray_=array[0..0] of NodeType;
 polygonptr=^polygontype;
 joinptr=^jointype;
-
 
 Polygontype=object
   textureref:byte;
@@ -82,7 +78,6 @@ Texturetype=record
   Colour:RGBtype;
   texturemap,bumpmap:bitmaptypeptr;
 end;
-
 
 polylisttype=^polylisttype_;
 polylisttype_=array[0..0] of Polygontype;
@@ -133,7 +128,7 @@ objtype_=object
   function  intensity(Poly:polygonptr):integer;
   Procedure multmatrix(mat:matrix3x4type);virtual;
   procedure Doorth(orientation:byte;xoff,yoff:integer;scale:real);
-  procedure do3d(X, Y : Integer);
+  procedure Do3d(xoffs,yoffs:integer);
 
   procedure dotter;
   procedure liner;
@@ -400,12 +395,6 @@ Begin
   intensity:=((SC.colourdepth-1) shr 1)+round(dot(u,lightvec.uvec));
 end;
 
-procedure FSwap(Var s,d; L:Integer);
-Begin
-  {
-  Inline($1e /$c5/$b6/s /$c4/$be/d /$8b/$8e/l /$fc /$26/$8a/$05
-         /$86/$04 /$46 /$aa /$e2/$f7 /$1f);}
-end;
 
 {clear the reserved field in the nodes}
 procedure objtype_.ResetNodeReservedAttrib;
@@ -467,7 +456,7 @@ begin
   end;
 end;
 
-procedure objtype_.do3d(X, Y : Integer);
+procedure objtype_.do3d(xoffs,yoffs:integer);
 var lop:word;
     {domat:matrix3x4type_;}
 Begin

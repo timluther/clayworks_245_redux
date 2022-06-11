@@ -15,7 +15,7 @@ matrix3x4type=^matrix3x4type_;
 vectorintptr=^vectorint;
 
 pointreal=object
-  x,y:Float32;
+  x,y:BasicUnit;
   function length:real;
   procedure normalize;
   procedure moveto(x_,y_:real);

@@ -515,7 +515,7 @@ Begin
    installed := set_mode(SC.graphmode);
 
    screen.size.x := 1024;
-   screen.size.y := 768;;
+   screen.size.y := 768;
    {
    if (SC.Driver = ST_Win32GDI) and (SC.graphmode = 103) then
    begin {Lazarus FullScreen Mode}

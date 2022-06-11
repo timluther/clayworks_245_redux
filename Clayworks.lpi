@@ -195,6 +195,7 @@
       <Unit>
         <Filename Value="GADGETS.PAS"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="gadgets"/>
       </Unit>
       <Unit>
         <Filename Value="LCD.PAS"/>
